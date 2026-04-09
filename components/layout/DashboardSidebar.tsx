@@ -1,0 +1,111 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
+import { LogoutButton } from './LogoutButton';
+
+export function DashboardSidebar() {
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function getUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+
+      if (user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('full_name, role, tier, kyc_status')
+          .eq('id', user.id)
+          .single();
+        setProfile(data);
+      }
+      setLoading(false);
+    }
+    getUser();
+  }, []);
+
+  if (loading) return null;
+
+  const isFounder = profile?.role === 'founder';
+
+  const founderMenu = [
+    { icon: 'dashboard', label: 'لوحة التحكم', href: '/dashboard/founder' },
+    { icon: 'lightbulb', label: 'مشاريعي', href: '/projects' },
+    { icon: 'add_circle', label: 'أضف فكرة', href: '/add-idea' },
+    { icon: 'trending_up', label: 'تقدم التمويل', href: '/funding-progress' },
+    { icon: 'chat', label: 'الرسائل', href: '/messages' },
+    { icon: 'settings', label: 'الإعدادات', href: '/settings' },
+  ];
+
+  const investorMenu = [
+    { icon: 'dashboard', label: 'لوحة التحكم', href: '/dashboard/investor' },
+    { icon: 'explore', label: 'الفرص', href: '/opportunities' },
+    { icon: 'account_balance_wallet', label: 'محفظتي', href: '/portfolio' },
+    { icon: 'bookmark', label: 'المحفوظات', href: '/saved' },
+    { icon: 'chat', label: 'الرسائل', href: '/messages' },
+    { icon: 'settings', label: 'الإعدادات', href: '/settings' },
+  ];
+
+  const menuItems = isFounder ? founderMenu : investorMenu;
+  const tierLabel = profile?.tier === 'platinum' ? 'البلاتيني' : profile?.tier === 'gold' ? 'الذهبي' : 'الأساسي';
+  const roleLabel = isFounder ? 'مؤسس' : 'مستثمر';
+
+  return (
+    <aside className="hidden xl:flex fixed right-0 top-20 h-[calc(100vh-80px)] w-64 bg-[#0a0e15] border-r border-[#00FFD1]/10 flex-col z-30">
+      {/* User Info */}
+      <div className="p-6 border-b border-white/5">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#00FFD1] flex items-center justify-center bg-primary-container/20">
+            <span className="material-symbols-outlined text-primary-container">person</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="font-body text-sm text-[#00FFD1] font-bold truncate">
+              {profile?.full_name ?? user?.email?.split('@')[0] ?? 'مستخدم'}
+            </h4>
+            <p className="font-body text-[10px] text-slate-500">{roleLabel} · {tierLabel}</p>
+          </div>
+        </div>
+        {profile?.kyc_status !== 'verified' && (
+          <Link
+            href="/kyc"
+            className="w-full py-2 px-3 bg-yellow-500/10 text-yellow-400 text-[10px] font-bold border border-yellow-500/20 hover:bg-yellow-500/20 transition-all flex items-center gap-2 justify-center"
+          >
+            <span className="material-symbols-outlined text-xs">warning</span>
+            أكمل التحقق من الهوية
+          </Link>
+        )}
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 py-4 overflow-y-auto">
+        {menuItems.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className="px-4 py-3 flex items-center gap-3 font-body text-sm transition-all border-r-4 text-slate-400 hover:text-[#00FFD1] hover:bg-[#00FFD1]/5 border-transparent hover:border-[#00FFD1]/50"
+          >
+            <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-white/5 space-y-2">
+        <div className="bg-[#050b14] p-3 border border-[#00FFD1]/10 mb-2">
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-[10px] text-slate-500 font-data">NETWORK STATUS</span>
+            <span className="w-2 h-2 rounded-full bg-[#00FFD1] animate-pulse"></span>
+          </div>
+          <div className="font-data text-[10px] text-primary-container">SECURE NODE: ACTIVE</div>
+        </div>
+        <LogoutButton />
+      </div>
+    </aside>
+  );
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;family=Orbitron:wght@400;700;900&amp;family=Tajawal:wght@400;500;700&amp;family=Space+Grotesk:wght@300;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#281900",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#d4c0ff",
+                        "primary-fixed": "#15ffd1",
+                        "secondary": "#d1bcff",
+                        "background": "#10131a",
+                        "primary-container": "#00ffd1",
+                        "surface-dim": "#10131a",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary-fixed": "#24005b",
+                        "tertiary": "#fffeff",
+                        "surface-container-low": "#181c23",
+                        "on-secondary-fixed-variant": "#5700c8",
+                        "on-primary-fixed": "#002019",
+                        "tertiary-fixed": "#ffdead",
+                        "secondary-container": "#6800ec",
+                        "tertiary-fixed-dim": "#ffba3a",
+                        "tertiary-container": "#ffddab",
+                        "secondary-fixed-dim": "#d1bcff",
+                        "on-error": "#690005",
+                        "outline": "#83958d",
+                        "on-primary-fixed-variant": "#005141",
+                        "surface-bright": "#363941",
+                        "on-primary": "#00382c",
+                        "on-tertiary": "#432c00",
+                        "surface": "#10131a",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#865c00",
+                        "surface-container-high": "#262a32",
+                        "inverse-primary": "#006b57",
+                        "on-surface": "#e0e2ec",
+                        "inverse-surface": "#e0e2ec",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-primary-container": "#00725c",
+                        "surface-container": "#1c2027",
+                        "on-background": "#e0e2ec",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#00e0b7",
+                        "primary-fixed-dim": "#00e0b7",
+                        "outline-variant": "#3a4a44",
+                        "on-surface-variant": "#b9cbc3",
+                        "primary": "#fffffd",
+                        "surface-container-lowest": "#0a0e15",
+                        "surface-variant": "#31353d",
+                        "on-secondary": "#3d0090",
+                        "surface-container-highest": "#31353d",
+                        "inverse-on-surface": "#2d3038"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["IBM Plex Sans Arabic"],
+                        "body": ["Tajawal"],
+                        "data": ["Orbitron"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #020409;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 209, 0.05) 0%, transparent 50%),
+                linear-gradient(rgba(2, 4, 9, 0.8), rgba(2, 4, 9, 0.8)),
+                url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 L40 40 L40 0 M0 0 L40 0' fill='none' stroke='%2300ffd1' stroke-width='0.5' stroke-opacity='0.1'/%3E%3C/svg%3E");
+            min-height: 100vh;
+        }
+
+        .clip-angular {
+            clip-path: polygon(15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%, 0% 15%);
+        }
+
+        .clip-cta {
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .l-bracket-tr {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #00e0b7;
+            border-right: 2px solid #00e0b7;
+        }
+
+        .l-bracket-bl {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #00e0b7;
+            border-left: 2px solid #00e0b7;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 209, 0.05);
+            position: fixed;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface overflow-x-hidden">
+<!-- Scanline Simulation -->
+<div class="scanline top-1/4"></div>
+<!-- Navigation suppressed per Transactional/Onboarding rule -->
+<main class="min-h-screen flex items-center justify-center p-4 md:p-8">
+<!-- Main Onboarding Container -->
+<div class="relative w-full max-w-2xl bg-surface-container-low/60 backdrop-blur-xl border border-outline-variant/15 p-8 md:p-12 shadow-[0_0_50px_rgba(0,255,209,0.05)]">
+<!-- L-Brackets -->
+<div class="l-bracket-tr"></div>
+<div class="l-bracket-bl"></div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+<div>
+<h1 class="font-headline text-3xl font-bold text-primary-container tracking-tight mb-2">إعداد الهوية الرقمية</h1>
+<p class="text-on-surface-variant font-medium">حدد مسارك في منظومة IDEA BUSINESS</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-high px-4 py-2 border-r-2 border-primary-container">
+<span class="font-data text-2xl font-black text-primary-container leading-none">01</span>
+<div class="flex flex-col leading-tight">
+<span class="font-data text-[10px] uppercase tracking-widest text-on-surface-variant">Step</span>
+<span class="font-data text-xs font-bold text-on-surface">OF 03</span>
+</div>
+</div>
+</div>
+<!-- Role Selection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<!-- Investor Role -->
+<div class="group relative cursor-pointer active:scale-95 transition-all">
+<input checked="" class="peer hidden" id="role-investor" name="role" type="radio"/>
+<label class="block p-6 bg-surface-container border border-outline-variant/30 peer-checked:border-secondary-container peer-checked:bg-secondary-container/5 transition-all group-hover:bg-surface-container-high" for="role-investor">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/20 text-secondary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div class="w-4 h-4 border-2 border-outline-variant rounded-full peer-checked:bg-secondary-container flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-1 group-hover:text-secondary">أنا مستثمر</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">أبحث عن فرص استثمارية واعدة ومدارة بالذكاء الاصطناعي.</p>
+</label>
+</div>
+<!-- Founder Role -->
+<div class="group relative cursor-pointer active:scale-95 transition-all">
+<input class="peer hidden" id="role-founder" name="role" type="radio"/>
+<label class="block p-6 bg-surface-container border border-outline-variant/30 peer-checked:border-primary-container peer-checked:bg-primary-container/5 transition-all group-hover:bg-surface-container-high" for="role-founder">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/20 text-primary-container">
+<span class="material-symbols-outlined text-3xl" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div class="w-4 h-4 border-2 border-outline-variant rounded-full peer-checked:bg-primary-container flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<h3 class="font-headline text-xl font-bold mb-1 group-hover:text-primary-container">أنا مؤسس</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">أقود شركة ناشئة وأبحث عن تمويل ذكي وشراكات استراتيجية.</p>
+</label>
+</div>
+</div>
+<!-- Interest Grid Section -->
+<div class="mb-12">
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-[1px] bg-primary-container"></span>
+<h2 class="font-headline text-lg font-bold text-on-surface">مجالات الاهتمام التقنية</h2>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2 text-sm font-bold bg-surface-container-highest border border-outline-variant/30 hover:border-primary-container hover:text-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="neurology">neurology</span>
+                        الذكاء الاصطناعي
+                    </button>
+<button class="px-5 py-2 text-sm font-bold bg-primary-container text-on-primary-container border border-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="apartment">apartment</span>
+                        العقارات التقنية
+                    </button>
+<button class="px-5 py-2 text-sm font-bold bg-surface-container-highest border border-outline-variant/30 hover:border-primary-container hover:text-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="health_and_safety">health_and_safety</span>
+                        التقنية الصحية
+                    </button>
+<button class="px-5 py-2 text-sm font-bold bg-surface-container-highest border border-outline-variant/30 hover:border-primary-container hover:text-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="payments">payments</span>
+                        التقنية المالية
+                    </button>
+<button class="px-5 py-2 text-sm font-bold bg-surface-container-highest border border-outline-variant/30 hover:border-primary-container hover:text-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="eco">eco</span>
+                        الطاقة النظيفة
+                    </button>
+<button class="px-5 py-2 text-sm font-bold bg-surface-container-highest border border-outline-variant/30 hover:border-primary-container hover:text-primary-container transition-colors clip-angular flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="database">database</span>
+                        البيانات الضخمة
+                    </button>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+<p class="text-xs max-w-[240px]">بإكمال ملفك الشخصي، سيقوم محرك الذكاء الاصطناعي بتخصيص لوحة التحكم الخاصة بك.</p>
+</div>
+<button class="w-full md:w-auto px-10 py-4 bg-gradient-to-l from-primary-container to-primary-fixed-dim text-on-primary font-bold text-lg clip-cta flex items-center justify-center gap-3 active:scale-95 transition-transform shadow-[0_0_20px_rgba(0,255,209,0.3)]">
+<span>إكمال الملف الشخصي</span>
+<span class="material-symbols-outlined rtl:rotate-180" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Decorative UI Elements -->
+<div class="fixed top-12 left-12 hidden lg:block opacity-20 pointer-events-none">
+<div class="font-data text-xs text-primary-container mb-2 tracking-tighter">SYSTEM_LATENCY: 14MS</div>
+<div class="font-data text-xs text-primary-container mb-2 tracking-tighter">DATA_STREAM: ENCRYPTED</div>
+<div class="font-data text-xs text-secondary tracking-tighter">NODE_IDENTIFIER: IDEA_HQ_01</div>
+</div>
+<div class="fixed bottom-12 right-12 hidden lg:block opacity-30 pointer-events-none">
+<svg class="text-primary-container" height="120" viewbox="0 0 100 100" width="120">
+<circle cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5"></circle>
+<path d="M50 5 L50 15 M50 85 L50 95 M5 50 L15 50 M85 50 L95 50" stroke="currentColor" stroke-width="1"></path>
+<text fill="currentColor" font-family="Orbitron" font-size="8" text-anchor="middle" x="50" y="54">SECURE</text>
+</svg>
+</div>
+</main>
+<!-- Hidden branding for hierarchy integrity -->
+<div class="fixed top-8 right-8 z-50">
+<span class="font-headline font-black text-2xl text-primary-container tracking-tighter">IDEA BUSINESS</span>
+</div>
+</body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>المستثمرون المعتمدون | IDEA BUSINESS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;700;900&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;family=Tajawal:wght@300;400;500;700&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .angular-clip { clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); }
+        .angular-clip-btn { clip-path: polygon(0 0, 95% 0, 100% 20%, 100% 100%, 5% 100%, 0 80%); }
+        .hex-clip { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+        .hex-grid { background-image: radial-gradient(circle, #00ffd1 1px, transparent 1px); background-size: 30px 30px; opacity: 0.05; }
+        .l-bracket-tr { border-top: 2px solid #ffba3a; border-right: 2px solid #ffba3a; width: 20px; height: 20px; position: absolute; top: 0; right: 0; }
+        .l-bracket-bl { border-bottom: 2px solid #ffba3a; border-left: 2px solid #ffba3a; width: 20px; height: 20px; position: absolute; bottom: 0; left: 0; }
+        body { background-color: #10131a; color: #e0e2ec; font-family: 'Tajawal', sans-serif; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#d1bcff",
+                      "secondary-container": "#6800ec",
+                      "tertiary-fixed": "#ffdead",
+                      "on-tertiary-fixed-variant": "#604100",
+                      "on-tertiary": "#432c00",
+                      "on-secondary": "#3d0090",
+                      "surface-container-highest": "#31353d",
+                      "on-primary-container": "#00725c",
+                      "surface-container-high": "#262a32",
+                      "primary-fixed-dim": "#00e0b7",
+                      "surface-tint": "#00e0b7",
+                      "primary-container": "#00ffd1",
+                      "inverse-on-surface": "#2d3038",
+                      "inverse-primary": "#006b57",
+                      "tertiary-fixed-dim": "#ffba3a",
+                      "error": "#ffb4ab",
+                      "on-background": "#e0e2ec",
+                      "on-primary-fixed": "#002019",
+                      "tertiary": "#fffeff",
+                      "on-surface": "#e0e2ec",
+                      "on-secondary-fixed": "#24005b",
+                      "surface-container-lowest": "#0a0e15",
+                      "surface-container-low": "#181c23",
+                      "secondary-fixed": "#eaddff",
+                      "surface-bright": "#363941",
+                      "outline": "#83958d",
+                      "on-primary": "#00382c",
+                      "primary": "#fffffd",
+                      "surface-container": "#1c2027",
+                      "on-secondary-fixed-variant": "#5700c8",
+                      "on-tertiary-container": "#865c00",
+                      "on-primary-fixed-variant": "#005141",
+                      "secondary": "#d1bcff",
+                      "on-secondary-container": "#d4c0ff",
+                      "outline-variant": "#3a4a44",
+                      "on-surface-variant": "#b9cbc3",
+                      "on-error": "#690005",
+                      "surface-variant": "#31353d",
+                      "background": "#10131a",
+                      "surface-dim": "#10131a",
+                      "on-tertiary-fixed": "#281900",
+                      "tertiary-container": "#ffddab",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "surface": "#10131a",
+                      "inverse-surface": "#e0e2ec",
+                      "primary-fixed": "#15ffd1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["IBM Plex Sans Arabic", "sans-serif"],
+                      "body": ["Tajawal", "sans-serif"],
+                      "label": ["Space Grotesk", "sans-serif"],
+                      "technical": ["Orbitron", "sans-serif"]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background min-h-screen relative overflow-x-hidden">
+<!-- Texture Overlay -->
+<div class="fixed inset-0 hex-grid pointer-events-none z-0"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-[#050b14]/90 backdrop-blur-3xl border-b border-[#00FFD1]/15 shadow-[0_0_24px_rgba(0,255,209,0.15)]">
+<div class="flex items-center gap-2 font-['Orbitron'] font-bold text-[#00FFD1] text-xl">
+            IDEA BUSINESS
+        </div>
+<div class="hidden md:flex gap-8 font-['Space_Grotesk'] text-[#E8F4FF] uppercase tracking-wider">
+<a class="text-slate-400 hover:text-[#00FFD1] transition-colors" href="#">الرئيسية</a>
+<a class="text-[#00FFD1] border-b-2 border-[#00FFD1] pb-1" href="#">الفرص</a>
+<a class="text-slate-400 hover:text-[#00FFD1] transition-colors" href="#">التحليلات</a>
+<a class="text-slate-400 hover:text-[#00FFD1] transition-colors" href="#">عن المنصة</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 px-4 py-2 hover:text-white transition-colors">دخول</button>
+<button class="bg-[#00FFD1] text-[#00382c] px-6 py-2 angular-clip-btn font-bold hover:brightness-110 active:scale-95 transition-all">أعلن عن فكرتك 💡</button>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on desktop for this view to prioritize directory canvas) -->
+<div class="hidden"></div>
+<main class="relative z-10 pt-32 pb-24 px-4 md:px-24 max-w-7xl mx-auto">
+<!-- Page Header -->
+<header class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="font-['Orbitron'] text-[11px] text-primary-container tracking-[0.2em] font-medium">// المستثمرون</span>
+<div class="flex items-center gap-2 bg-surface-container-high/50 px-3 py-1 border border-primary-container/20">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-[10px] text-emerald-400 font-technical">٣ مستثمر نشط</span>
+</div>
+</div>
+<h1 class="text-[44px] font-headline font-bold text-white mb-2 leading-tight">💼 المستثمرون المعتمدون</h1>
+<p class="text-[16px] font-body text-[#4A6B8A] max-w-2xl">مستثمرون متحقق منهم يبحثون عن فرص واعدة من خلال واجهة ذكاء اصطناعي متطورة.</p>
+</header>
+<!-- Filter Bar -->
+<section class="mb-8 flex flex-col md:flex-row gap-6 items-center justify-between">
+<div class="flex flex-wrap gap-2">
+<button class="bg-primary-container text-on-primary font-bold px-5 py-2 angular-clip-btn text-sm">الكل</button>
+<button class="bg-surface-container-high text-slate-400 px-5 py-2 angular-clip-btn text-sm hover:text-white hover:bg-surface-container-highest transition-all">تقنية</button>
+<button class="bg-surface-container-high text-slate-400 px-5 py-2 angular-clip-btn text-sm hover:text-white hover:bg-surface-container-highest transition-all">عقارات</button>
+<button class="bg-surface-container-high text-slate-400 px-5 py-2 angular-clip-btn text-sm hover:text-white hover:bg-surface-container-highest transition-all">صحة</button>
+<button class="bg-surface-container-high text-slate-400 px-5 py-2 angular-clip-btn text-sm hover:text-white hover:bg-surface-container-highest transition-all">طاقة</button>
+<button class="bg-surface-container-high text-slate-400 px-5 py-2 angular-clip-btn text-sm hover:text-white hover:bg-surface-container-highest transition-all">تمويل</button>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<div class="relative group w-full md:w-48">
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-primary-container">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+</div>
+<select class="w-full bg-surface-container-low border-b border-outline-variant focus:border-primary-container text-white text-sm pr-10 py-3 appearance-none focus:ring-0">
+<option>نطاق الاستثمار</option>
+<option>1M - 5M</option>
+<option>5M - 20M</option>
+</select>
+</div>
+<div class="relative group w-full md:w-48">
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-primary-container">
+<span class="material-symbols-outlined text-sm">groups</span>
+</div>
+<select class="w-full bg-surface-container-low border-b border-outline-variant focus:border-primary-container text-white text-sm pr-10 py-3 appearance-none focus:ring-0">
+<option>نوع المستثمر</option>
+<option>Venture Capital</option>
+<option>Private Equity</option>
+<option>Angel</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Investor Cards Container -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="relative group bg-[#0A1628] hover:shadow-[0_0_30px_rgba(255,186,58,0.1)] transition-all duration-500 overflow-hidden">
+<div class="l-bracket-tr"></div>
+<div class="l-bracket-bl"></div>
+<div class="p-8 flex flex-col md:flex-row items-center gap-10">
+<!-- LEFT: Profile -->
+<div class="relative">
+<div class="w-32 h-32 hex-clip bg-gradient-to-br from-primary-container/40 to-secondary-container/40 flex items-center justify-center p-1">
+<div class="w-full h-full hex-clip bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<img alt="صندوق الريادة" class="w-full h-full object-cover" data-alt="professional male executive in a sleek modern office environment with digital data overlays and cool blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1KumPS2UlhtBql6lJS3rRZUxSrytUFxlbGpTTTersIDJHmAWQ15BNb54fYx_0WLuSSjotztXZUKBVJhQXbf_lxXlS8290KihJ7nIeS7qIYztfvkAR-vuRECLhYZGk6Ng8xtz4c8BlIw2bNCHNLm6wqDlUPIlRVaEC4xYEu9On4QxU_Rh7Y2EtqgzfTC1JIyoybxNCTpgxc-qqVsMn1eIV8iphovPfoXVZh-UiYD7BTVI9miNdtKdhZNHVj-DTXH5fXcGEZCKZ4zY"/>
+</div>
+</div>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1 border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<!-- CENTER: Info -->
+<div class="flex-grow text-center md:text-right">
+<div class="flex flex-col md:flex-row items-center gap-3 mb-2">
+<h3 class="text-22px font-headline font-bold text-white">صندوق الريادة الخليجي</h3>
+<span class="angular-clip bg-primary-container/10 text-primary-container text-[10px] font-bold px-4 py-1 tracking-wider">VC</span>
+</div>
+<div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">تقنية</span>
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">صحة</span>
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">تمويل</span>
+</div>
+<p class="text-[14px] font-body text-slate-400">نركز على الشركات الناشئة في مراحل النمو المبكر ذات الأثر التقني العالي.</p>
+</div>
+<!-- RIGHT: Stats -->
+<div class="flex gap-12 items-center">
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">نطاق الاستثمار</span>
+<div class="flex items-baseline gap-1">
+<span class="font-technical font-bold text-xl text-[#00FFD1]">50M</span>
+<span class="text-slate-600 font-technical text-xs">—</span>
+<span class="font-technical font-bold text-xl text-[#7B2FFF]">4M</span>
+<span class="text-[10px] text-slate-400 mr-1">ر.س</span>
+</div>
+</div>
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">الصفقات</span>
+<span class="font-technical font-bold text-[36px] text-white leading-none">24</span>
+</div>
+<button class="border border-tertiary-fixed-dim/40 hover:border-tertiary-fixed-dim hover:bg-tertiary-fixed-dim/5 text-tertiary-fixed-dim font-bold py-3 px-8 angular-clip-btn transition-all">طلب تواصل</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group bg-[#0A1628] hover:shadow-[0_0_30px_rgba(255,186,58,0.1)] transition-all duration-500 overflow-hidden">
+<div class="l-bracket-tr"></div>
+<div class="l-bracket-bl"></div>
+<div class="p-8 flex flex-col md:flex-row items-center gap-10">
+<!-- LEFT: Profile -->
+<div class="relative">
+<div class="w-32 h-32 hex-clip bg-gradient-to-br from-secondary-container/40 to-tertiary-fixed-dim/40 flex items-center justify-center p-1">
+<div class="w-full h-full hex-clip bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<img alt="مجموعة الدار" class="w-full h-full object-cover" data-alt="abstract business representation with geometric structures, golden lighting, and high-tech office architectural details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqNtLTkSXkKauQ9W3qURLFYJ-l-cvgNnD5RJd_Inz8toNL4LMJUvQERlfcozi1vK_WrAq7bBeu3ciUVGSx_UfRKk2vBNCNEGOkUoleq7f_gHkyaOMPF-dFWOWPg68rAN_yTRT6UjanVk_4jE27kwqVbW8plhPjB73uikEYU0Go-7umS9UkIgEC2nKXR4uPJVmTNf4u9YqMjgaLfooOKwbc1PWCEhb75N1y6k5UvWu4XKXZ-NumA1XUo7TjjcZnj4TzquqCLKHur54"/>
+</div>
+</div>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1 border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<!-- CENTER: Info -->
+<div class="flex-grow text-center md:text-right">
+<div class="flex flex-col md:flex-row items-center gap-3 mb-2">
+<h3 class="text-22px font-headline font-bold text-white">مجموعة الدار للاستثمار</h3>
+<span class="angular-clip bg-secondary-container/10 text-secondary-container text-[10px] font-bold px-4 py-1 tracking-wider">PE</span>
+</div>
+<div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">عقارات</span>
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">لوجستيات</span>
+</div>
+<p class="text-[14px] font-body text-slate-400">استثمارات استراتيجية في الأصول الملموسة والقطاعات اللوجستية التحويلية.</p>
+</div>
+<!-- RIGHT: Stats -->
+<div class="flex gap-12 items-center">
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">نطاق الاستثمار</span>
+<div class="flex items-baseline gap-1">
+<span class="font-technical font-bold text-xl text-[#00FFD1]">25M</span>
+<span class="text-slate-600 font-technical text-xs">—</span>
+<span class="font-technical font-bold text-xl text-[#7B2FFF]">2M</span>
+<span class="text-[10px] text-slate-400 mr-1">ر.س</span>
+</div>
+</div>
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">الصفقات</span>
+<span class="font-technical font-bold text-[36px] text-white leading-none">11</span>
+</div>
+<button class="border border-tertiary-fixed-dim/40 hover:border-tertiary-fixed-dim hover:bg-tertiary-fixed-dim/5 text-tertiary-fixed-dim font-bold py-3 px-8 angular-clip-btn transition-all">طلب تواصل</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group bg-[#0A1628] hover:shadow-[0_0_30px_rgba(255,186,58,0.1)] transition-all duration-500 overflow-hidden">
+<div class="l-bracket-tr"></div>
+<div class="l-bracket-bl"></div>
+<div class="p-8 flex flex-col md:flex-row items-center gap-10">
+<!-- LEFT: Profile -->
+<div class="relative">
+<div class="w-32 h-32 hex-clip bg-gradient-to-br from-emerald-500/40 to-primary-container/40 flex items-center justify-center p-1">
+<div class="w-full h-full hex-clip bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<img alt="هيئة المحفظة" class="w-full h-full object-cover" data-alt="futuristic green technology lab with soft bioluminescent plants and clean white laboratory surfaces with glass displays" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPQIVnpYFRYbUPuCax5n5VuCNZd0Mnsssx-FIeWwDjSVM0ItQ1_C1CqSxP50m7LwZa56GFXCfb8idmr6wf8ktbYFKKxE5BNaJrghXbspMZUVyNhdjCzAy5lXlthbnTbrBTX24QJpGW2_j911mlpz-Kb8gkAqhHQ-4trbYqfg0Vd1iUFgFODGltQK2bb1ufJ1FSdyqTFdNLQ24CY-m8mHLi7WPVAE_hpDmAwIf1Ju3qQ6eWKcSNsM3MgPLGDlwViu4KU653-Wj_TD4"/>
+</div>
+</div>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest rounded-full p-1 border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<!-- CENTER: Info -->
+<div class="flex-grow text-center md:text-right">
+<div class="flex flex-col md:flex-row items-center gap-3 mb-2">
+<h3 class="text-22px font-headline font-bold text-white">هيئة المحفظة الخضراء</h3>
+<span class="angular-clip bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-4 py-1 tracking-wider uppercase">Impact Fund</span>
+</div>
+<div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">صحة</span>
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">طاقة</span>
+<span class="bg-surface-container-high text-[#4A6B8A] text-[10px] px-3 py-0.5 border border-[#4A6B8A]/20">استدامة</span>
+</div>
+<p class="text-[14px] font-body text-slate-400">نستثمر في المستقبل المستدام والحلول البيئية ذات التأثير الاجتماعي العميق.</p>
+</div>
+<!-- RIGHT: Stats -->
+<div class="flex gap-12 items-center">
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">نطاق الاستثمار</span>
+<div class="flex items-baseline gap-1">
+<span class="font-technical font-bold text-xl text-[#00FFD1]">35M</span>
+<span class="text-slate-600 font-technical text-xs">—</span>
+<span class="font-technical font-bold text-xl text-[#7B2FFF]">3M</span>
+<span class="text-[10px] text-slate-400 mr-1">ر.س</span>
+</div>
+</div>
+<div class="text-center">
+<span class="block font-body text-[11px] text-slate-500 mb-1">الصفقات</span>
+<span class="font-technical font-bold text-[36px] text-white leading-none">8</span>
+</div>
+<button class="border border-tertiary-fixed-dim/40 hover:border-tertiary-fixed-dim hover:bg-tertiary-fixed-dim/5 text-tertiary-fixed-dim font-bold py-3 px-8 angular-clip-btn transition-all">طلب تواصل</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Become an Investor CTA -->
+<section class="mt-16 relative">
+<div class="bg-surface-container-low border-r-4 border-secondary-container p-12 flex flex-col md:flex-row items-center justify-between gap-8 group overflow-hidden">
+<div class="absolute inset-0 bg-secondary-container/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div>
+<h2 class="text-[28px] font-headline font-bold text-white mb-2">هل أنت مستثمر وتبحث عن فرص؟</h2>
+<p class="text-slate-400">انضم إلى شبكة المستثمرين المعتمدين واطلع على أفضل المشاريع والفرص المتاحة.</p>
+</div>
+<button class="bg-secondary-container text-white px-10 py-4 angular-clip-btn font-bold flex items-center gap-4 hover:brightness-125 transition-all">
+<span>انضم كمستثمر</span>
+<span class="material-symbols-outlined transform rotate-180">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-12 grid grid-cols-1 md:grid-cols-3 gap-8 rtl bg-[#050b14] border-t border-[#00FFD1]/20 shadow-[0_-4px_20px_rgba(0,255,209,0.05)] relative z-10">
+<div>
+<div class="font-['Orbitron'] text-[#00FFD1] font-black text-2xl mb-4">IDEA BUSINESS</div>
+<p class="font-['Tajawal'] text-xs text-slate-400 leading-relaxed max-w-xs">
+                منصة الاستثمار السيادي الرقمي الأولى في المنطقة، حيث يلتقي الابتكار بالرأس المال الذكي لتشكيل مستقبل الاقتصاد.
+            </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-white font-bold mb-2">روابط سريعة</h4>
+<div class="flex flex-wrap gap-4 font-['Tajawal'] text-xs text-slate-500">
+<a class="hover:text-white transition-colors" href="#">الشروط والأحكام</a>
+<a class="hover:text-white transition-colors" href="#">سياسة الخصوصية</a>
+<a class="hover:text-white transition-colors" href="#">اتصل بنا</a>
+<a class="hover:text-white transition-colors" href="#">خارطة الطريق</a>
+</div>
+</div>
+<div class="md:text-left flex flex-col justify-end">
+<p class="font-['Tajawal'] text-xs text-slate-400">
+                © 2024 IDEA BUSINESS. السيادة المالية الرقمية.
+            </p>
+</div>
+</footer>
+</body></html>

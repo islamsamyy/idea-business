@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IDEA BUSINESS - إعدادات الحساب</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Tajawal:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#281900",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#d4c0ff",
+                    "primary-fixed": "#15ffd1",
+                    "secondary": "#d1bcff",
+                    "background": "#10131a",
+                    "primary-container": "#00ffd1",
+                    "surface-dim": "#10131a",
+                    "secondary-fixed": "#eaddff",
+                    "on-secondary-fixed": "#24005b",
+                    "tertiary": "#fffeff",
+                    "surface-container-low": "#181c23",
+                    "on-secondary-fixed-variant": "#5700c8",
+                    "on-primary-fixed": "#002019",
+                    "tertiary-fixed": "#ffdead",
+                    "secondary-container": "#6800ec",
+                    "tertiary-fixed-dim": "#ffba3a",
+                    "tertiary-container": "#ffddab",
+                    "secondary-fixed-dim": "#d1bcff",
+                    "on-error": "#690005",
+                    "outline": "#83958d",
+                    "on-primary-fixed-variant": "#005141",
+                    "surface-bright": "#363941",
+                    "on-primary": "#00382c",
+                    "on-tertiary": "#432c00",
+                    "surface": "#10131a",
+                    "error-container": "#93000a",
+                    "on-tertiary-container": "#865c00",
+                    "surface-container-high": "#262a32",
+                    "inverse-primary": "#006b57",
+                    "on-surface": "#e0e2ec",
+                    "inverse-surface": "#e0e2ec",
+                    "on-tertiary-fixed-variant": "#604100",
+                    "on-primary-container": "#00725c",
+                    "surface-container": "#1c2027",
+                    "on-background": "#e0e2ec",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#00e0b7",
+                    "primary-fixed-dim": "#00e0b7",
+                    "outline-variant": "#3a4a44",
+                    "on-surface-variant": "#b9cbc3",
+                    "primary": "#fffffd",
+                    "surface-container-lowest": "#0a0e15",
+                    "surface-variant": "#31353d",
+                    "on-secondary": "#3d0090",
+                    "surface-container-highest": "#31353d",
+                    "inverse-on-surface": "#2d3038"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Tajawal"],
+                    "label": ["Space Grotesk"],
+                    "data": ["Orbitron"],
+                    "arabic": ["IBM Plex Sans Arabic"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hex-grid {
+            background-image: radial-gradient(circle, #00ffd1 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 209, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .angular-clip {
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .l-bracket-top-right {
+            border-top: 2px solid #00ffd1;
+            border-right: 2px solid #00ffd1;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .l-bracket-bottom-left {
+            border-bottom: 2px solid #00ffd1;
+            border-left: 2px solid #00ffd1;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body min-h-screen overflow-x-hidden">
+<div class="fixed inset-0 hex-grid pointer-events-none"></div>
+<div class="scanline"></div>
+<!-- SideNavBar (from Shared Components JSON) -->
+<aside class="fixed right-0 top-0 h-full flex flex-col rtl h-screen w-64 border-l border-[#00ffd1]/10 bg-[#0a0e15] z-40 hidden md:flex">
+<div class="p-6">
+<div class="text-xl font-black text-[#00ffd1] mb-8 font-headline">IDEA BUSINESS</div>
+<div class="flex items-center gap-3 mb-10 p-4 bg-[#10131a] relative">
+<div class="l-bracket-top-right"></div>
+<div class="w-10 h-10 bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#00ffd1]">shield_person</span>
+</div>
+<div>
+<p class="font-arabic font-bold text-sm text-[#00ffd1]">القائد الاستثماري</p>
+<p class="text-[10px] text-gray-500 uppercase tracking-widest font-headline">Sovereign Intel</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 text-gray-500 p-4 hover:bg-[#10131a] hover:text-[#00ffd1] transition-all cursor-pointer active:brightness-125 font-arabic font-bold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>لوحة التحكم</span>
+</a>
+<a class="flex items-center gap-3 text-gray-500 p-4 hover:bg-[#10131a] hover:text-[#00ffd1] transition-all cursor-pointer active:brightness-125 font-arabic font-bold" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span>الاستثمارات</span>
+</a>
+<a class="flex items-center gap-3 bg-[#00ffd1]/10 text-[#00ffd1] border-r-4 border-[#00ffd1] p-4 cursor-pointer active:brightness-125 font-arabic font-bold" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span>التحقق</span>
+</a>
+<a class="flex items-center gap-3 text-gray-500 p-4 hover:bg-[#10131a] hover:text-[#00ffd1] transition-all cursor-pointer active:brightness-125 font-arabic font-bold" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span>المحفظة</span>
+</a>
+<a class="flex items-center gap-3 text-gray-500 p-4 hover:bg-[#10131a] hover:text-[#00ffd1] transition-all cursor-pointer active:brightness-125 font-arabic font-bold" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>الإعدادات</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6">
+<button class="w-full py-3 bg-[#00ffd1] text-on-primary-fixed font-arabic font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform" style="clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);">
+<span class="material-symbols-outlined">add</span>
+<span>استثمار جديد</span>
+</button>
+<div class="mt-4 flex items-center gap-3 text-gray-500 p-4 hover:bg-[#10131a] hover:text-error transition-all cursor-pointer font-arabic font-bold">
+<span class="material-symbols-outlined">logout</span>
+<span>تسجيل الخروج</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:mr-64 min-h-screen p-6 lg:p-12 pb-24 md:pb-12">
+<!-- Header -->
+<header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<h1 class="text-4xl font-arabic font-bold text-on-surface tracking-tight">إعدادات الأمان</h1>
+<p class="text-outline font-arabic opacity-80">تحصين هويتك الرقمية وأصولك الاستثمارية باستخدام بروتوكولات الأمان السيادية.</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container p-4 border border-outline-variant/20">
+<div class="w-2 h-2 bg-primary-container rounded-full animate-pulse shadow-[0_0_8px_#00ffd1]"></div>
+<span class="font-data text-xs uppercase tracking-tighter text-primary-container">System Status: Active Integrity</span>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- 2FA & Quick Controls -->
+<div class="lg:col-span-5 space-y-8">
+<!-- 2FA Module -->
+<section class="bg-surface-container-high p-8 relative overflow-hidden">
+<div class="l-bracket-top-right"></div>
+<div class="l-bracket-bottom-left"></div>
+<div class="flex items-start justify-between mb-6">
+<div class="space-y-2">
+<h3 class="text-xl font-arabic font-bold text-primary-container">المصادقة الثنائية (2FA)</h3>
+<p class="text-sm text-on-surface-variant font-arabic">طبقة حماية إضافية تطلب رمزاً من هاتفك عند تسجيل الدخول.</p>
+</div>
+<span class="material-symbols-outlined text-primary-container text-4xl">vibration</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border-r-4 border-primary-container">
+<span class="font-arabic font-medium">تفعيل بروتوكول المصادقة</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="mt-6 flex gap-4">
+<img class="w-24 h-24 border border-primary-container/30 p-2 bg-white/5" data-alt="high-tech futuristic neon qr code scanning interface for security verification with digital overlay elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUNGw1_XmzTjOypkKELfHr6ytT-iQfq6YUMc9-_wa0xuBEYPeFtidqkODq2ZLFXLd1GRlfVcPizarjBGkx8SYj7h6V48HPQhPQ-pygvQLfYq98F766qKrRNg_jl8yFTJvMCzauH2rIvBKWQyJ7BXUje0kJcXi3QOoaszCA7pNYRTvO8WmEnwQ7nYiLMMrp6Mb4IEZ9NFPbf2hAvmgIWNHeZLbJivQOD5JPzk3HfnY11wPTAVD8tXAoGdi8mkehV-yd5Vl8xC77lN4"/>
+<div class="flex-1 flex flex-col justify-center">
+<p class="text-xs text-outline mb-2 font-arabic">امسح الرمز لتفعيل تطبيق Authenticator</p>
+<code class="bg-surface-container text-primary-container font-data p-2 text-center text-sm tracking-widest">A79-X92-INTELL</code>
+</div>
+</div>
+</section>
+<!-- Active Sessions -->
+<section class="bg-surface-container-high p-8 relative">
+<div class="l-bracket-top-right opacity-40"></div>
+<div class="l-bracket-bottom-left opacity-40"></div>
+<h3 class="text-xl font-arabic font-bold text-on-surface mb-6">الجلسات النشطة</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container border-l border-primary-container/20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">desktop_windows</span>
+<div>
+<p class="font-arabic text-sm font-bold">متصفح كروم - ويندوز</p>
+<p class="font-data text-xs text-outline">IP: 192.168.1.104</p>
+</div>
+</div>
+<span class="text-[10px] font-data text-primary-container bg-primary-container/10 px-2 py-1">CURRENT</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container border-l border-outline-variant/20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">smartphone</span>
+<div>
+<p class="font-arabic text-sm font-bold">تطبيق آيفون - الرياض</p>
+<p class="font-data text-xs text-outline">IP: 92.14.22.181</p>
+</div>
+</div>
+<button class="text-error text-xs font-arabic hover:underline">إنهاء</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Password & Action Area -->
+<div class="lg:col-span-7">
+<section class="bg-surface-container-low p-8 lg:p-12 border-t-4 border-primary-container/30">
+<h3 class="text-2xl font-arabic font-bold text-on-surface mb-10 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">lock_reset</span>
+                        تغيير كلمة المرور
+                    </h3>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-3 col-span-full">
+<label class="text-sm font-arabic font-medium text-outline">كلمة المرور الحالية</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-x-0 border-t-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-data py-4 px-0 transition-all placeholder:text-surface-variant" placeholder="••••••••••••" type="password"/>
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline-variant cursor-pointer">visibility</span>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-arabic font-medium text-outline">كلمة المرور الجديدة</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-x-0 border-t-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-data py-4 px-0 transition-all placeholder:text-surface-variant" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-arabic font-medium text-outline">تأكيد كلمة المرور</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-x-0 border-t-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface font-data py-4 px-0 transition-all placeholder:text-surface-variant" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+</div>
+<div class="bg-secondary-container/5 p-6 border-l border-secondary-container/20 mt-12">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary-container">info</span>
+<div class="space-y-2">
+<h4 class="font-arabic font-bold text-on-surface">متطلبات القوة</h4>
+<ul class="text-xs font-arabic text-on-surface-variant space-y-1 opacity-70">
+<li>• يجب أن لا تقل عن 12 حرفاً</li>
+<li>• يجب أن تحتوي على رموز معقدة (!@#$%^)</li>
+<li>• استخدام خليط من الأرقام والحروف الكبيرة</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="pt-12 flex justify-end">
+<button class="group relative px-12 py-5 bg-gradient-to-r from-[#00ffd1] to-[#00bfa5] text-on-primary-fixed font-arabic font-bold text-lg overflow-hidden active:scale-95 transition-all" style="clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);" type="submit">
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+<span class="relative z-10 flex items-center gap-3">
+                                    حفظ التغييرات
+                                    <span class="material-symbols-outlined">bolt</span>
+</span>
+</button>
+</div>
+</form>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-2 bg-[#10131a]/80 backdrop-blur-lg z-50 border-t border-[#00ffd1]/15 shadow-[0_-4px_20px_rgba(0,255,209,0.1)]">
+<a class="flex flex-col items-center justify-center text-gray-500 py-2 px-4 hover:bg-[#00ffd1]/10 duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-arabic text-[10px] mt-1">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 py-2 px-4 hover:bg-[#00ffd1]/10 duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-arabic text-[10px] mt-1">السوق</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 py-2 px-4 hover:bg-[#00ffd1]/10 duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-arabic text-[10px] mt-1">المحفظة</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00ffd1] bg-[#00ffd1]/5 rounded-none border-t-2 border-[#00ffd1] py-2 px-4 duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-arabic text-[10px] mt-1">الملف</span>
+</a>
+</nav>
+</body></html>

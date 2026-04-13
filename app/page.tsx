@@ -383,6 +383,103 @@ export default async function HomePage() {
         {/* FAQ Section */}
         <FAQSection />
 
+        {/* --- NEW SECTIONS --- */}
+        
+        {/* Section 1: Saudi Arabia Presence */}
+        <section className="py-24 px-6 bg-primary-container/[0.02] border-y border-white/5 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+          </div>
+          <div className="container mx-auto">
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div className="order-2 lg:order-1 text-right">
+                   <div className="inline-flex items-center gap-2 text-primary-container font-data text-xs mb-6 tracking-widest uppercase">
+                      <span className="w-8 h-[1px] bg-primary-container"></span>
+                      من قلب الرياض إلى كافة أنحاء المملكة
+                   </div>
+                   <h2 className="text-4xl md:text-6xl font-black text-white font-headline leading-tight mb-8">
+                      رؤية سعودية <br/> <span className="text-primary-container">لطموح عالمي</span>
+                   </h2>
+                   <p className="text-slate-400 text-lg leading-relaxed mb-8 font-body">
+                      نحن في IDEA BUSINESS نفخر بأننا منصة سعودية بالكامل، صُممت لتواكب رؤية المملكة ٢٠٣٠ في التحول الرقمي ودعم المنشآت الصغيرة والمتوسطة. نعمل على تمكين الكفاءات الوطنية وربطها بالموارد التي تستحقها.
+                   </p>
+                   <div className="flex items-center gap-4 text-white font-bold bg-white/5 p-4 border-r-4 border-primary-container max-w-fit">
+                      <span className="material-symbols-outlined text-3xl">location_on</span>
+                      <span>فخورون بخدمة أكثر من ١٣ منطقة إدارية في المملكة</span>
+                   </div>
+                </div>
+                <div className="order-1 lg:order-2 relative group">
+                   <div className="absolute -inset-4 bg-primary-container/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                   <Image 
+                     src="https://images.unsplash.com/photo-1586724230449-623832c39d89?w=800" 
+                     width={800} 
+                     height={500} 
+                     alt="Saudi Innovation" 
+                     className="clip-card relative z-10 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
+                   />
+                </div>
+             </div>
+          </div>
+        </section>
+
+        {/* Section 2: Future Vision */}
+        <section className="py-24 px-6 relative">
+          <div className="container mx-auto text-center">
+             <div className="max-w-4xl mx-auto">
+                <h2 className="text-4xl md:text-7xl font-black text-white font-headline uppercase tracking-tighter mb-12">
+                   نبني <span className="bg-gradient-to-r from-tertiary-fixed-dim to-secondary-fixed-dim bg-clip-text text-transparent italic">المستقبل</span> خطوة بخطوة
+                </h2>
+                <p className="text-slate-400 text-xl leading-relaxed mb-16 font-body">
+                   طموحنا لا يتوقف عند الربط المبدئي؛ نحن نعمل على تطوير ميزات ثورية تشمل التقييم الآلي للمشاريع وتحليل المخاطر اللحظي عبر الذكاء الاصطناعي، لنضمن أن تكون رحلتك الاستثمارية هي الأكثر أمناً وذكاءً في المنطقة.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
+                   {[
+                     { title: "تقييم ذكي", desc: "أدوات متطورة لتحليل جدوى الفكرة تقنياً ومالياً." },
+                     { title: "توسع إقليمي", desc: "نبحث دائماً عن فرص لربط مشاريعنا بأسواق الخليج." },
+                     { title: "دعم مستمر", desc: "تحديثات دورية تضمن بقاء منصتنا في قمة الهرم التقني." }
+                   ].map((item, i) => (
+                     <div key={i} className="bg-[#0A1628] p-8 border border-white/5 relative group hover:border-primary-container/30 transition-all">
+                        <div className="l-bracket-tr opacity-10"></div>
+                        <h4 className="text-primary-container font-black mb-4 font-headline text-xl">{item.title}</h4>
+                        <p className="text-slate-500 text-sm font-body leading-relaxed">{item.desc}</p>
+                     </div>
+                   ))}
+                </div>
+             </div>
+          </div>
+        </section>
+
+        {/* Section 3: Success for All */}
+        <section className="py-24 px-6 bg-[#0A1628] border-y border-white/5 relative overflow-hidden">
+          <div className="container mx-auto">
+             <div className="flex flex-col lg:flex-row gap-16 items-center justify-between">
+                <div className="max-w-2xl text-right">
+                   <h2 className="text-4xl md:text-5xl font-black text-white font-headline mb-8">
+                      نجاحك هو <span className="text-secondary-fixed-dim">المقياس الوحيد</span> لإنجازنا
+                   </h2>
+                   <p className="text-slate-400 text-lg leading-relaxed mb-10 font-body">
+                      في IDEA BUSINESS، نحن لا نبني منصة، بل نبني مجتمعاً. نجاح "صاحب الفكرة" في الحصول على تمويل هو انتصار لـ "المستثمر" في اقتناص الفرصة، وهو مساهمة حقيقية منا في نمو الاقتصاد الوطني. نحن هنا لننجح معاً.
+                   </p>
+                   <div className="flex gap-4">
+                      <div className="px-6 py-3 bg-primary-container/10 border border-primary-container/30 text-primary-container font-bold rounded-lg text-sm">
+                         +١٠٠٠ مستخدم نشط
+                      </div>
+                      <div className="px-6 py-3 bg-secondary-container/10 border border-secondary-container/30 text-secondary-container font-bold rounded-lg text-sm">
+                         بيئة آمنة ١٠٠٪
+                      </div>
+                   </div>
+                </div>
+                <div className="w-full lg:w-1/3">
+                   <div className="p-10 border-2 border-dashed border-white/10 relative">
+                      <div className="absolute -top-4 -right-4 bg-primary-container text-background p-2 font-black text-xs uppercase">إحصائية حية</div>
+                      <div className="text-7xl font-black text-white font-data mb-4">٩٨٪</div>
+                      <div className="text-slate-400 font-headline font-bold">نسبة رضاء مجتمع رواد الأعمال والمستثمرين عن سهولة استخدام المنصة.</div>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="py-24 px-6 relative">
           <div className="container mx-auto max-w-5xl relative z-10">

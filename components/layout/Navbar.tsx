@@ -91,12 +91,12 @@ export function Navbar() {
           ) : (
             <div className="hidden md:flex items-center gap-3">
               <Link href="/login">
-                <button className="text-[#E8F4FF] font-medium px-4 py-2 text-sm hover:text-primary-container transition-colors">
+                <button className="text-[#E8F4FF] font-black px-6 py-2.5 text-sm border border-white/10 rounded-md hover:bg-white/5 transition-colors">
                   دخول
                 </button>
               </Link>
               <Link href="/register">
-                <button className="bg-primary-container text-[#050b14] font-bold px-6 py-2 clip-button hover:shadow-[0_0_15px_rgba(0,255,209,0.3)] transition-all duration-300 active:scale-95 text-sm">
+                <button className="bg-[#00ffd1] text-black font-black px-6 py-2.5 rounded-md hover:brightness-110 transition-all duration-300 active:scale-95 text-sm shadow-[0_0_20px_rgba(0,255,209,0.2)]">
                   إنشاء حساب
                 </button>
               </Link>

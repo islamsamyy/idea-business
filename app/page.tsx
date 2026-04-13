@@ -135,8 +135,8 @@ export default async function HomePage() {
       className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right"
       dir="rtl"
     >
-      <div className="fixed inset-0 hex-grid pointer-events-none z-0 opacity-10"></div>
-      <div className="fixed inset-0 scanline pointer-events-none z-0 opacity-10"></div>
+      <div className="fixed inset-0 neon-grid pointer-events-none z-0 opacity-20"></div>
+      <div className="fixed inset-0 scanline pointer-events-none z-0 opacity-5"></div>
       <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-secondary-container/10 blur-[150px] -z-10 rounded-full"></div>
       <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-primary-container/10 blur-[150px] -z-10 rounded-full"></div>
 

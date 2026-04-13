@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Orbitron, Manrope, IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
+import { Orbitron, IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
-  subsets: ["latin"],
-});
-
-const manrope = Manrope({
-  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -43,13 +34,15 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${spaceGrotesk.variable} ${orbitron.variable} ${manrope.variable} ${ibmPlexSansArabic.variable} ${tajawal.variable} h-full antialiased dark`}
+      className={`${orbitron.variable} ${ibmPlexSansArabic.variable} ${tajawal.variable} h-full antialiased dark`}
     >
       <head>
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground font-body">
         {children}
+        <Toaster position="bottom-right" theme="dark" />
       </body>
     </html>
   );

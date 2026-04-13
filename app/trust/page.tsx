@@ -46,7 +46,7 @@ export default function TrustCenter() {
       <main className="container mx-auto px-6 pt-32 pb-24 relative z-10">
         <div className="max-w-4xl mx-auto">
           <header className="mb-20 text-center">
-            <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">// بروتوكولات الأمان</span>
+            <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">{/* // بروتوكولات الأمان */}</span>
             <h1 className="font-headline text-5xl md:text-7xl font-black text-white uppercase tracking-tight mb-8">مركز الثقة</h1>
             <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
               في IDEA BUSINESS، نحن لا نربط بين الناس فحسب، بل نبني بيئة تقوم على النزاهة المطلقة والأمان التقني العالي. ثقتكم هي أثمن ما نملك.

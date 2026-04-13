@@ -5,8 +5,10 @@ import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function ProjectDetailsPage({ params }: { params: { id: string } }) {
+export default function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params);
   return (
     <div className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right" dir="rtl">
       {/* Global Background Elements */}
@@ -31,7 +33,7 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
             منصة متكاملة لإدارة أسطول النقل الجوي داخل المدن، مدعومة بخوارزميات التعلم العميق لتقليل الازدحام بنسبة 40%.
           </p>
           <div className="flex flex-wrap gap-4">
-             <Link href={`/projects/${params.id}/funding`}>
+             <Link href={`/projects/${id}/funding`}>
               <Button className="bg-primary-container text-[#050b14] font-bold px-8 py-3 clip-button hover:shadow-[0_0_15px_rgba(0,255,209,0.3)] transition-all uppercase tracking-widest font-data">
                 تمويل المشروع
               </Button>
@@ -84,7 +86,7 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
                <h3 className="font-bold font-headline text-secondary-container mb-4">الفريق المؤسس</h3>
                <div className="flex items-center gap-4 mb-4">
                  <div className="w-12 h-12 bg-surface-container-highest rounded-full overflow-hidden border border-secondary-container/30">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop" alt="Founder" />
+                    <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop" width={48} height={48} alt="Founder" className="w-full h-full object-cover" />
                  </div>
                  <div>
                     <p className="text-sm font-bold text-white">د. طارق الناصر</p>

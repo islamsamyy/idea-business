@@ -3,11 +3,19 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { User } from '@supabase/supabase-js';
 import { LogoutButton } from './LogoutButton';
 
+interface Profile {
+  full_name: string;
+  role: 'founder' | 'investor';
+  tier: string;
+  kyc_status: string;
+}
+
 export function DashboardSidebar() {
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
@@ -27,7 +35,7 @@ export function DashboardSidebar() {
       setLoading(false);
     }
     getUser();
-  }, []);
+  }, [supabase]);
 
   if (loading) return null;
 

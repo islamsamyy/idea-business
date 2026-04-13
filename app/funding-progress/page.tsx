@@ -207,7 +207,7 @@ export default function FundingProgressPage() {
             <div className="bg-surface-container-highest p-6 relative overflow-hidden">
               <div className="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container/10 rounded-full blur-2xl"></div>
               <p className="text-[10px] font-bold text-secondary-container uppercase mb-2 font-data">AI Intelligence Projection</p>
-              <p className="text-white text-sm leading-relaxed">بناءً على وتيرة الالتزام الحالية، من المتوقع اكتمال الجولة خلال <span className="text-secondary-container font-data">4.2</span> أيام. نوصي بتفعيل حزمة "الإغلاق السريع" للمستثمرين المتبقين.</p>
+              <p className="text-white text-sm leading-relaxed">بناءً على وتيرة الالتزام الحالية، من المتوقع اكتمال الجولة خلال <span className="text-secondary-container font-data">4.2</span> أيام. نوصي بتفعيل حزمة &quot;الإغلاق السريع&quot; للمستثمرين المتبقين.</p>
             </div>
           </aside>
         </div>

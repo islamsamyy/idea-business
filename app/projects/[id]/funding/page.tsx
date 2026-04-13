@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
 
@@ -14,7 +14,7 @@ export default function FundingProgress() {
 
   return (
     <div className="bg-background text-on-surface font-body min-h-screen flex relative overflow-hidden text-right" dir="rtl">
-      {/* Background Decor */}
+      {/* // Background Decor */}
       <div className="fixed inset-0 scanline opacity-5 pointer-events-none"></div>
       
       <DashboardSidebar />
@@ -24,7 +24,7 @@ export default function FundingProgress() {
 
         <main className="flex-grow p-6 pt-24 max-w-5xl mx-auto w-full">
           <header className="mb-12">
-            <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">// تتبع الاستثمار</span>
+            <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">{/* // تتبع الاستثمار */}</span>
             <h1 className="font-headline text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">تقدم التمويل</h1>
             <p className="text-slate-500">مشروع GreenPulse - جولة تمويلية المرحلة (أ)</p>
           </header>
@@ -32,7 +32,7 @@ export default function FundingProgress() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-[#0A1628] border border-white/5 p-8 relative overflow-hidden">
               <div className="l-bracket-tr opacity-20"></div>
-              <h3 className="text-lg font-black text-white mb-8 font-headline uppercase tracking-widest">// حالة الجولة الحالية</h3>
+              <h3 className="text-lg font-black text-white mb-8 font-headline uppercase tracking-widest">{/* // حالة الجولة الحالية */}</h3>
               <div className="space-y-6">
                 <div className="flex justify-between items-end">
                   <span className="text-slate-500 font-data text-xs uppercase">المبلغ المجموعة</span>
@@ -50,7 +50,7 @@ export default function FundingProgress() {
 
             <div className="bg-[#0A1628] border border-white/5 p-8 relative overflow-hidden">
               <div className="l-bracket-tr opacity-20"></div>
-              <h3 className="text-lg font-black text-white mb-8 font-headline uppercase tracking-widest">// تفاصيل المستثمرين</h3>
+              <h3 className="text-lg font-black text-white mb-8 font-headline uppercase tracking-widest">{/* // تفاصيل المستثمرين */}</h3>
               <div className="flex items-center gap-8">
                 <div className="flex flex-col gap-1">
                   <span className="text-white font-data text-3xl font-black">١٤</span>
@@ -59,7 +59,7 @@ export default function FundingProgress() {
                 <div className="flex-grow flex -space-x-reverse space-x-4">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="w-12 h-12 rounded-full border-2 border-[#0A1628] bg-slate-800 overflow-hidden ring-1 ring-white/5 transition-transform hover:-translate-y-1">
-                      <img src={`https://i.pravatar.cc/150?u=${i}`} alt="" />
+                      <Image src={`https://i.pravatar.cc/150?u=${i}`} alt="" width={48} height={48} />
                     </div>
                   ))}
                   <div className="w-12 h-12 rounded-full border-2 border-[#0A1628] bg-primary-container flex items-center justify-center text-background font-black text-xs">

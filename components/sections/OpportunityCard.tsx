@@ -18,7 +18,6 @@ export default function OpportunityCard({
   id,
   title,
   description,
-  category,
   tags,
   aiScore,
   fundingRequired,

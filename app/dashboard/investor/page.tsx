@@ -1,49 +1,81 @@
-'use client';
-
 import React from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
-export default function InvestorDashboard() {
+export default async function InvestorDashboard() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  // Fetch investments for total portfolio
+  const { data: investments } = await supabase
+    .from('investments')
+    .select('amount')
+    .eq('investor_id', user.id);
+
+  const totalPortfolio = investments?.reduce((sum, inv) => sum + (Number(inv.amount) || 0), 0) || 0;
+
+  // Fetch saved opportunities
+  const { data: savedOppsData } = await supabase
+    .from('saved_opportunities')
+    .select(`
+      id,
+      created_at,
+      project:projects (
+        id, title, category, status
+      )
+    `)
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(3);
+
+  // Fetch unread messages
+  const { count: unreadMessages } = await supabase
+    .from('messages')
+    .select('*', { count: 'exact', head: true })
+    .eq('receiver_id', user.id)
+    .eq('read', false);
   const stats = [
-    { label: 'إجمالي المحفظة', value: '1,420,000', unit: 'SAR', border: 'border-primary-container' },
-    { label: 'فرص مهتم بها', value: '12', border: 'border-secondary-container' },
-    { label: 'اجتماعات قادمة', value: '03', border: 'border-tertiary-fixed-dim' },
-    { label: 'رسائل جديدة', value: '08', border: 'border-primary-container' },
+    { label: 'إجمالي المحفظة', value: totalPortfolio.toLocaleString(), unit: 'SAR', border: 'border-primary-container' },
+    { label: 'فرص مهتم بها', value: savedOppsData?.length?.toString() || '0', border: 'border-secondary-container' },
+    { label: 'اجتماعات قادمة', value: '0', border: 'border-tertiary-fixed-dim' },
+    { label: 'رسائل جديدة', value: unreadMessages?.toString() || '0', border: 'border-primary-container' },
   ];
 
-  const recommendations = [
-    {
-      title: 'منصة نقد الرقمية',
-      description: 'توسيع نطاق الدفع الفوري في دول مجلس التعاون الخليجي باستخدام بلوكتشين.',
-      category: 'TECH_FINANCE',
-      match: '98%',
-      target: '5,000,000 SAR',
-      color: 'primary-container',
-    },
-    {
-      title: 'طاقة الصحراء',
-      description: 'مشروع متكامل لتخزين الطاقة الشمسية في المناطق النائية بتقنيات متطورة.',
-      category: 'GREEN_ENERGY',
-      match: '92%',
-      target: '12,500,000 SAR',
-      color: 'secondary-container',
-    },
-    {
-      title: 'روبوتيك ميد',
-      description: 'أنظمة جراحية مساعدة بالذكاء الاصطناعي للمستشفيات التخصصية الحديثة.',
-      category: 'HEALTH_AI',
-      match: '89%',
-      target: '8,200,000 SAR',
-      color: 'primary-container',
-    },
-  ];
+  const { data: dbProjects } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('status', 'active')
+    .limit(3);
 
-  const savedOpportunities = [
-    { id: 'A1', name: 'شركة الخدمات السحابية المتطورة', date: '2023.10.12', category: 'CLOUD_COMPUTING', round: 'Series B', status: 'نشطة', color: 'primary-container' },
-    { id: 'B4', name: 'المصانع الذكية للأغذية', date: '2023.10.10', category: 'AGRI_TECH', round: 'Seed Round', status: 'قيد المراجعة', color: 'tertiary-fixed-dim' },
-    { id: 'C9', name: 'إيكو ترافل هب', date: '2023.10.08', category: 'TRAVEL_TECH', round: 'Series A', status: 'نشطة', color: 'primary-container' },
-  ];
+  const recommendations = dbProjects?.map(project => ({
+    title: project.title,
+    description: project.description,
+    category: project.category || 'عام',
+    match: `${project.ai_score || 85}%`,
+    target: `${(project.funding_goal / 1000000).toFixed(1)}M SAR`,
+    color: 'primary-container',
+  })) || [];
+  type SavedOp = { id: string; created_at: string; project: { id: string; title: string; category: string; status: string } | { id: string; title: string; category: string; status: string }[] | null };
+  const savedOpportunities = savedOppsData?.map((op: SavedOp) => {
+    // Supabase can return the joined item as an array if the relation is unclear
+    const project = Array.isArray(op.project) ? op.project[0] : op.project;
+    
+    return {
+      id: project?.id?.slice(0, 4)?.toUpperCase() || 'NA',
+      fullname: project?.title || 'Unknown',
+      date: new Date(op.created_at).toLocaleDateString(),
+      category: project?.category || 'عام',
+      round: 'تأسيس',
+      status: project?.status || 'متاح',
+      color: 'primary-container'
+    };
+  }) || [];
 
   return (
     <div className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right" dir="rtl">
@@ -117,7 +149,7 @@ export default function InvestorDashboard() {
                 <div className={`absolute left-0 top-0 bottom-0 w-1 bg-${op.color} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
                 <div className={`w-12 h-12 bg-slate-900 flex items-center justify-center font-data text-${op.color} border border-${op.color}/20 shrink-0`}>{op.id}</div>
                 <div className="flex-1 text-center md:text-right">
-                  <h4 className="font-bold text-white font-headline">{op.name}</h4>
+                  <h4 className="font-bold text-white font-headline">{op.fullname}</h4>
                   <div className="flex items-center justify-center md:justify-start gap-4 mt-1">
                     <span className="text-xs text-slate-500 font-data">DATE: {op.date}</span>
                     <span className="text-xs text-slate-500 font-data">CATEGORY: {op.category}</span>
@@ -137,6 +169,9 @@ export default function InvestorDashboard() {
                 </button>
               </div>
             ))}
+            {savedOpportunities.length === 0 && (
+              <div className="text-center py-8 text-slate-500 font-body">لا يوجد فرص محفوظة حالياً.</div>
+            )}
           </div>
         </section>
       </main>

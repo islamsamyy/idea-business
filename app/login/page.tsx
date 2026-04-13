@@ -5,6 +5,7 @@ import { login } from '@/app/auth/actions';
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -39,6 +40,8 @@ export default function LoginPage() {
               <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-body text-right">
                 {error === 'Invalid login credentials'
                   ? 'البريد الإلكتروني أو كلمة المرور غير صحيحة.'
+                  : error === 'Email not confirmed'
+                  ? 'يرجى تأكيد بريدك الإلكتروني أولاً. تحقق من صندوق الوارد.'
                   : error}
               </div>
             )}
@@ -59,14 +62,19 @@ export default function LoginPage() {
               </div>
               <div className="group relative">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary-container transition-colors">visibility</span>
+                  <span 
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary-container transition-colors"
+                  >
+                    {showPassword ? 'visibility_off' : 'visibility'}
+                  </span>
                   <label className="block text-xs font-headline text-primary-container uppercase tracking-widest">كلمة المرور</label>
                 </div>
                 <input
                   name="password"
                   className="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant/30 focus:border-primary-container focus:ring-0 text-white font-data py-3 transition-all placeholder:text-slate-700 text-right"
                   placeholder="••••••••"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   autoComplete="current-password"
                 />
@@ -77,7 +85,7 @@ export default function LoginPage() {
                   <input className="w-4 h-4 bg-transparent border-primary-container/50 rounded-none checked:bg-primary-container focus:ring-0 focus:ring-offset-0" type="checkbox"/>
                   <span className="text-sm text-slate-400 group-hover:text-slate-200 transition-colors font-body">تذكرني</span>
                 </label>
-                <a className="text-sm text-primary-container hover:text-primary-fixed-dim transition-colors font-body" href="#">نسيت كلمة المرور؟</a>
+                <a className="text-sm text-primary-container hover:text-primary-fixed-dim transition-colors font-body" href="/forgot-password">نسيت كلمة المرور؟</a>
               </div>
               <button
                 className="w-full bg-primary-container text-background font-headline font-black py-4 text-lg clip-button flex items-center justify-center gap-3 group active:scale-95 transition-transform uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"

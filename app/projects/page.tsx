@@ -1,27 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
-export default function MyProjects() {
-  const projects = [
-    {
-      title: 'نظام إدارة الطاقة الذكي - GreenPulse',
-      status: 'نشط',
-      views: '١.٢ ألف',
-      interested: '١٤ استثمار',
-      lastUpdate: 'قبل يومين',
-      img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600',
-    },
-    {
-      title: 'منصة الحوسبة اللامركزية - NodeLink',
-      status: 'مسودة',
-      views: '٠',
-      interested: '٠',
-      lastUpdate: 'قبل أسبوع',
-      img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600',
-    },
-  ];
+export default async function MyProjects() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('founder_id', user.id)
+    .order('created_at', { ascending: false });
+
+  const projectList = projects || [];
 
   return (
     <div className="bg-background text-on-surface font-body min-h-screen flex relative overflow-hidden text-right" dir="rtl">
@@ -36,7 +35,7 @@ export default function MyProjects() {
         <main className="flex-grow p-6 pt-24 max-w-7xl mx-auto w-full">
           <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
             <div>
-              <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">// مشاريعك</span>
+              <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50"></span>
               <h1 className="font-headline text-4xl md:text-5xl font-black text-white uppercase tracking-tight">مشاريعي وأفكاري</h1>
             </div>
             <Link href="/add-idea" className="bg-primary-container text-background font-black px-8 py-4 clip-button text-lg flex items-center gap-3 hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,255,209,0.2)]">
@@ -46,28 +45,28 @@ export default function MyProjects() {
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((proj, i) => (
-              <div key={i} className="bg-[#0A1628] border border-white/5 overflow-hidden flex flex-col md:flex-row group hover:border-primary-container/30 transition-all duration-500">
+            {projectList.map((proj) => (
+              <div key={proj.id} className="bg-[#0A1628] border border-white/5 overflow-hidden flex flex-col md:flex-row group hover:border-primary-container/30 transition-all duration-500">
                 <div className="md:w-48 h-48 md:h-auto overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
-                  <img src={proj.img} alt={proj.title} className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" />
-                  <div className={`absolute top-3 right-3 px-3 py-1 text-[10px] font-black uppercase clip-button ${proj.status === 'نشط' ? 'bg-primary-container text-background' : 'bg-slate-700 text-slate-300'}`}>
-                    {proj.status}
+                  <Image src={proj.img || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600"} alt={proj.title} width={200} height={200} className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" />
+                  <div className={`absolute top-3 right-3 px-3 py-1 text-[10px] font-black uppercase clip-button ${proj.status === 'active' ? 'bg-primary-container text-background' : 'bg-slate-700 text-slate-300'}`}>
+                    {proj.status === 'active' ? 'نشط' : (proj.status === 'inactive' ? 'غير نشط' : proj.status)}
                   </div>
                 </div>
                 
                 <div className="flex-grow p-6 flex flex-col justify-between">
                   <div>
                     <h3 className="text-xl font-black text-white mb-2 font-headline group-hover:text-primary-container transition-colors line-clamp-2">{proj.title}</h3>
-                    <p className="text-slate-500 text-xs font-data uppercase tracking-widest mb-6 border-b border-white/5 pb-4">آخر تحديث: {proj.lastUpdate}</p>
+                    <p className="text-slate-500 text-xs font-data uppercase tracking-widest mb-6 border-b border-white/5 pb-4">تاريخ الإضافة: {new Date(proj.created_at).toLocaleDateString('ar-SA')}</p>
                     
                     <div className="flex gap-6">
                       <div className="flex flex-col">
-                        <span className="text-white font-black font-data text-lg">{proj.views}</span>
-                        <span className="text-[10px] text-slate-500 uppercase font-black font-headline">مشاهدة</span>
+                        <span className="text-white font-black font-data text-lg">{(proj.funding_goal || 0).toLocaleString()}</span>
+                        <span className="text-[10px] text-slate-500 uppercase font-black font-headline">الهدف (ريال)</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-primary-container font-black font-data text-lg">{proj.interested}</span>
-                        <span className="text-[10px] text-slate-500 uppercase font-black font-headline">مهتم</span>
+                        <span className="text-primary-container font-black font-data text-lg">{(proj.amount_raised || 0).toLocaleString()}</span>
+                        <span className="text-[10px] text-slate-500 uppercase font-black font-headline">تم جمعه</span>
                       </div>
                     </div>
                   </div>
@@ -83,11 +82,17 @@ export default function MyProjects() {
               </div>
             ))}
 
-            {/* Empty State Mock */}
-            {projects.length < 3 && (
+            {projectList.length === 0 && (
+              <div className="md:col-span-2 bg-slate-900 shadow-inner border-2 border-dashed border-white/5 flex flex-col items-center justify-center p-12 text-center opacity-50">
+                <span className="material-symbols-outlined text-5xl text-slate-700 mb-4">folder_open</span>
+                <p className="text-slate-500 font-body">ليس لديك أي مشاريع حتى الآن.</p>
+              </div>
+            )}
+            
+            {projectList.length > 0 && projectList.length < 3 && (
               <div className="bg-slate-900 shadow-inner border-2 border-dashed border-white/5 flex flex-col items-center justify-center p-12 text-center opacity-50">
                 <span className="material-symbols-outlined text-5xl text-slate-700 mb-4">folder_open</span>
-                <p className="text-slate-500 font-body">لا توجد مشاريع أخرى بانتظار المراجعة.</p>
+                <p className="text-slate-500 font-body">لا توجد مشاريع أخرى.</p>
               </div>
             )}
           </div>

@@ -1,10 +1,47 @@
-'use client';
-
 import React from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default function FounderDashboardPage() {
+export default async function FounderDashboardPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  // Fetch founder's profile and projects
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('founder_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  const mainProject = projects && projects.length > 0 ? projects[0] : null;
+
+  // Fetch recent messages directed to this founder
+  const { data: messages } = await supabase
+    .from('messages')
+    .select('*')
+    .eq('receiver_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(5);
+
+  // Fetch investor interest (saved_opportunities count)
+  let interestCount = 84; // Fallback
+  if (mainProject) {
+    const { count } = await supabase
+      .from('saved_opportunities')
+      .select('*', { count: 'exact', head: true })
+      .eq('project_id', mainProject.id);
+    interestCount = count || 0;
+  }
+
   return (
     <div className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right" dir="rtl">
       {/* Global Background Elements */}
@@ -23,14 +60,20 @@ export default function FounderDashboardPage() {
             <p className="text-slate-400 font-body mt-2 max-w-md">مرحباً بك مجدداً. إليك نظرة شاملة على أداء مشروعك الحالي وتفاعلات المستثمرين.</p>
           </div>
           <div className="flex gap-4">
-            <button className="clip-button bg-surface-container-high/40 backdrop-blur-md px-6 py-3 border border-outline-variant/10 text-primary-container font-headline font-bold flex items-center gap-2 hover:bg-surface-container-high transition-all uppercase tracking-widest text-xs">
+            <Link 
+              href={mainProject ? `/projects/${mainProject.id}/edit` : '#'}
+              className="clip-button bg-surface-container-high/40 backdrop-blur-md px-6 py-3 border border-outline-variant/10 text-primary-container font-headline font-bold flex items-center gap-2 hover:bg-surface-container-high transition-all uppercase tracking-widest text-xs"
+            >
               <span className="material-symbols-outlined text-sm">edit</span>
               <span>تعديل الفكرة</span>
-            </button>
-            <button className="clip-button bg-primary-container text-background px-6 py-3 font-headline font-black flex items-center gap-2 hover:brightness-110 transition-all shadow-[0_0_24px_rgba(0,255,209,0.15)] uppercase tracking-widest text-xs">
+            </Link>
+            <Link 
+              href={mainProject ? `/projects/${mainProject.id}/analytics` : '#'}
+              className="clip-button bg-primary-container text-background px-6 py-3 font-headline font-black flex items-center gap-2 hover:brightness-110 transition-all shadow-[0_0_24px_rgba(0,255,209,0.15)] uppercase tracking-widest text-xs"
+            >
               <span className="material-symbols-outlined text-sm">bar_chart</span>
               <span>عرض التقرير المفصل</span>
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -42,30 +85,31 @@ export default function FounderDashboardPage() {
             <div className="l-bracket-bl"></div>
             <div className="flex flex-col md:flex-row gap-8 items-start relative z-10">
               <div className="w-full md:w-1/3 aspect-square bg-[#0a0e15] border border-primary-container/20 relative overflow-hidden">
-                <img alt="Project" className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5p6jddd4OQSxg67LnQIVhUda0Y2pOr_AjPkrJ93BXz1EIA4ZsXAheymzHLRcVk0QN46J4PREB4ttiLvyT2h4ygvu7PvvhRcYAFNDF99ZJ4N0ExGJx-PiixJcbZXwEoYgkPEfVGFLfRkTB3hWj6de8zoUxAYlj6OcMwYXzalSNjLFjk8GohCvRygHH_mA6tbF1vYTDzX8n-Gc1hFZq3aPP90CKWKd5eW5-LUn3qCj6R4CihvHKjgf2a3426DOi7MzCuIos9tVZK7M"/>
+                <Image alt="Project" width={400} height={400} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-110" src={mainProject?.img || "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600"} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 right-4">
                   <span className="bg-primary-container/10 text-primary-container text-[10px] px-3 py-1 border border-primary-container/30 font-headline font-black uppercase tracking-widest">قيد التطوير</span>
                 </div>
               </div>
               <div className="flex-1 text-right">
-                <h3 className="font-headline text-2xl font-bold text-primary-container mb-4 uppercase tracking-tight">منصة مزادات العقارات بالذكاء الاصطناعي</h3>
+                <h3 className="font-headline text-2xl font-bold text-primary-container mb-4 uppercase tracking-tight">
+                  {mainProject ? mainProject.title : "لا يوجد مشروع حالي"}
+                </h3>
                 <p className="text-slate-400 font-body leading-relaxed mb-6">
-                  نظام ذكي يستخدم خوارزميات التعلم الآلي للتنبؤ بأسعار العقارات وتنظيم المزادات الرقمية بشكل مؤتمت بالكامل، مما يضمن الشفافية والعدالة لجميع الأطراف.
+                  {mainProject ? mainProject.description : "قم بإضافة مشروعك الأول للبدء في تلقي التمويل والتواصل مع المستثمرين."}
                 </p>
                 <div className="grid grid-cols-3 gap-4 border-t border-outline-variant/10 pt-6">
                   <div className="text-right">
-                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-headline font-bold mb-1">مشاهدات الملف</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-headline font-bold mb-1">التمويل المطلوب</p>
                     <div className="flex items-end justify-end gap-2">
-                      <span className="text-primary-container text-[10px] mb-1 font-data font-bold">+12%</span>
-                      <span className="font-data text-2xl font-black text-white">1,248</span>
+                      <span className="font-data text-xl md:text-2xl font-black text-white">{mainProject ? `$${(mainProject.funding_goal / 1000).toFixed(1)}K` : '0'}</span>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] text-slate-500 uppercase tracking-widest font-headline font-bold mb-1">اهتمام المستثمرين</p>
                     <div className="flex items-end justify-end gap-2 text-right">
-                      <span className="text-primary-container text-[10px] mb-1 font-data font-bold">+5</span>
-                      <span className="font-data text-2xl font-black text-white">84</span>
+                      <span className="text-primary-container text-[10px] mb-1 font-data font-bold">{interestCount > 0 ? '+1' : '+0'}</span>
+                      <span className="font-data text-2xl font-black text-white">{interestCount}</span>
                     </div>
                   </div>
                   <div className="text-right">
@@ -108,22 +152,23 @@ export default function FounderDashboardPage() {
               </h4>
             </div>
             <div className="space-y-4">
-              {[
-                { title: 'طلب تواصل من صندوق الريادة', meta: 'منذ ساعتين • استثمار محتمل', icon: 'contact_mail', color: 'text-secondary-container', bg: 'bg-secondary-container/10' },
-                { title: 'تم تحديث الـ AI Score', meta: 'منذ 5 ساعات • تحسين في معايير المخاطر', icon: 'auto_awesome', color: 'text-primary-container', bg: 'bg-primary-container/10' },
-                { title: 'اكتمال التحقق من الهوية العقارية', meta: 'أمس • تم توثيق الأصول', icon: 'verified', color: 'text-tertiary-fixed-dim', bg: 'bg-tertiary-fixed-dim/10' }
-              ].map((item, i) => (
+              {messages && messages.map((msg: { id: string; content: string; read: boolean }, i: number) => (
                 <div key={i} className="flex items-center gap-4 p-4 bg-surface-container-high/30 hover:bg-surface-container-high transition-colors group">
                   <span className="material-symbols-outlined text-slate-600 group-hover:text-primary-container transition-colors">arrow_forward_ios</span>
                   <div className="flex-1 text-right">
-                    <p className="font-headline text-sm font-bold text-white uppercase tracking-tight">{item.title}</p>
-                    <p className="text-[11px] text-slate-500 font-body">{item.meta}</p>
+                    <p className="font-headline text-sm font-bold text-white uppercase tracking-tight">رسالة جديدة مستلمة</p>
+                    <p className="text-[11px] text-slate-500 font-body block overflow-hidden text-ellipsis whitespace-nowrap max-w-xs">{msg.content || 'رسالة جديدة من مستثمر'}</p>
                   </div>
-                  <div className={`w-10 h-10 ${item.bg} flex items-center justify-center border border-white/5`}>
-                    <span className={`material-symbols-outlined ${item.color}`}>{item.icon}</span>
+                  <div className={`w-10 h-10 ${msg.read ? 'bg-surface-container-high' : 'bg-primary-container/10'} flex items-center justify-center border border-white/5`}>
+                    <span className={`material-symbols-outlined ${msg.read ? 'text-slate-500' : 'text-primary-container'}`}>mail</span>
                   </div>
                 </div>
               ))}
+              {(!messages || messages.length === 0) && (
+                <div className="text-center py-6 text-slate-500 text-sm">
+                  لا يوجد نشاط جديد حالياً.
+                </div>
+              )}
             </div>
           </div>
 
@@ -149,7 +194,7 @@ export default function FounderDashboardPage() {
           <div className="flex gap-8 order-2 md:order-1">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 mb-1 font-headline font-bold uppercase">رأس المال المطلوب</p>
-              <p className="font-data font-black text-primary-container">$2.5M</p>
+              <p className="font-data font-black text-primary-container">{mainProject ? `$${(mainProject.funding_goal / 1000000).toFixed(1)}M` : '$0'}</p>
             </div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 mb-1 font-headline font-bold uppercase">الوثائق المرفوعة</p>

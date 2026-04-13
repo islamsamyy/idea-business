@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
+import Image from 'next/image';
 
 export default function MessagesPage() {
   const [activeChat, setActiveChat] = useState(0);
@@ -70,7 +71,7 @@ export default function MessagesPage() {
                   className={`w-full p-4 flex gap-4 transition-all border-b border-white/5 last:border-0 hover:bg-white/5 ${activeChat === i ? 'bg-primary-container/5 border-r-4 border-r-primary-container' : ''}`}
                 >
                   <div className="relative shrink-0">
-                    <img src={chat.img} alt={chat.name} className="w-12 h-12 rounded-full object-cover grayscale brightness-75 border border-white/10" />
+                    <Image width={48} height={48} src={chat.img} alt={chat.name} className="w-12 h-12 rounded-full object-cover grayscale brightness-75 border border-white/10" />
                     {chat.online && <div className="absolute bottom-0 right-0 w-3 h-3 bg-primary-container rounded-full border-2 border-[#0A1628]"></div>}
                   </div>
                   <div className="flex-grow text-right overflow-hidden">
@@ -90,7 +91,7 @@ export default function MessagesPage() {
             <div className="l-bracket-tr opacity-10"></div>
             <header className="p-6 border-b border-white/5 bg-slate-900/50 flex justify-between items-center">
               <div className="flex items-center gap-4">
-                <img src={chats[activeChat].img} alt={chats[activeChat].name} className="w-10 h-10 rounded-full object-cover" />
+                <Image width={40} height={40} src={chats[activeChat].img} alt={chats[activeChat].name} className="w-10 h-10 rounded-full object-cover" />
                 <div>
                   <h3 className="text-white font-bold">{chats[activeChat].name}</h3>
                   <p className="text-[10px] text-primary-container font-data uppercase tracking-widest">{chats[activeChat].online ? 'متصل الآن' : 'غير متصل'}</p>
@@ -111,9 +112,9 @@ export default function MessagesPage() {
 
               {/* Message Left (Receiver) */}
               <div className="flex gap-4 max-w-[70%]">
-                <img src={chats[activeChat].img} className="w-8 h-8 rounded-full self-end" alt="" />
+                <Image width={32} height={32} src={chats[activeChat].img} className="w-8 h-8 rounded-full self-end" alt="" />
                 <div className="bg-white/5 border border-white/10 p-4 clip-button text-sm text-slate-300 leading-relaxed font-body">
-                  مرحباً بك، اطلعت على فكرة "GreenPulse" وهي مبهرة. هل يمكننا مراجعة نموذج العمل الخاص بك غداً؟
+                  مرحباً بك، اطلعت على فكرة &quot;GreenPulse&quot; وهي مبهرة. هل يمكننا مراجعة نموذج العمل الخاص بك غداً؟
                   <div className="text-[10px] text-slate-600 mt-2 text-left font-data">10:42 AM</div>
                 </div>
               </div>

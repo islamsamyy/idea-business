@@ -1,18 +1,37 @@
 import React from 'react';
 import { Navbar } from '@/components/layout/Navbar';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import Image from 'next/image';
 
-export default function PortfolioPage() {
-  const tableData = [
-    { name: 'نيوم لابتيكس', invested: '$450,000', current: '$620,000', status: 'ACTIVE', next: 'جولة التمويل B' },
-    { name: 'الرياح للطاقة المتجددة', invested: '$280,000', current: '$315,000', status: 'ACTIVE', next: 'بدء التشغيل التجاري' },
-    { name: 'فينتيك سولوشنز', invested: '$150,000', current: '$200,000', status: 'EXITED', next: 'تم التخارج بنجاح' },
-    { name: 'مدار للأمن السيبراني', invested: '$365,000', current: '$485,000', status: 'ACTIVE', next: 'الاستحواذ المقترح' },
-  ];
+export default async function PortfolioPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  const { data: investments } = await supabase
+    .from('investments')
+    .select('amount, project:projects(title, status)')
+    .eq('investor_id', user.id);
+
+  const tableData = investments?.length ? investments.map(inv => {
+    const project = Array.isArray(inv.project) ? inv.project[0] : inv.project;
+    return {
+      name: project?.title || 'Unknown',
+      invested: `$${Number(inv.amount || 0).toLocaleString()}`,
+      current: `$${Number((inv.amount || 0) * 1.25).toLocaleString()}`,
+      status: 'ACTIVE',
+      next: 'جولة تمويل قادمة'
+    };
+  }) : [];
 
   const reports = [
-    { time: '2 hours ago', title: 'تقرير الربع الثالث: نيوم لابتيكس', desc: 'تجاوزت الإيرادات التوقعات بنسبة 15% مع توسع جديد في السوق الخليجي.', color: '#6800ec' },
-    { time: 'Yesterday', title: 'تحديث تنظيمي: قطاع الطاقة', desc: 'تشريعات جديدة تدعم حوافز الاستثمار في المشاريع الخضراء.', color: '#1e293b' },
-    { time: '3 days ago', title: 'تحليل مخاطر: مدار للأمن', desc: 'تحسينات أمنية جديدة ترفع تقييم المخاطر إلى المستوى الممتاز.', color: '#ffba3a' },
+    { time: '2 hours ago', title: 'تقرير الربع الثالث', desc: 'تجاوزت الإيرادات التوقعات بنسبة 15%.', color: '#6800ec' },
+    { time: 'Yesterday', title: 'تحديث تنظيمي', desc: 'تشريعات جديدة تدعم حوافز الاستثمار في المشاريع الخضراء.', color: '#1e293b' },
+    { time: '3 days ago', title: 'تحليل مخاطر', desc: 'تحسينات أمنية جديدة ترفع تقييم المخاطر إلى المستوى الممتاز.', color: '#ffba3a' },
   ];
 
   return (
@@ -28,7 +47,7 @@ export default function PortfolioPage() {
         <aside className="hidden lg:flex flex-col h-screen fixed right-0 top-0 pt-20 w-64 bg-[#0a0e15] border-l border-[#00ffd1]/10 z-40">
           <div className="px-6 py-4 flex flex-col items-center border-b border-[#00ffd1]/10 mb-4">
             <div className="w-16 h-16 rounded-none border-2 border-[#00ffd1] p-1 mb-2">
-              <img alt="Investor Avatar" className="w-full h-full bg-surface-container-high object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsueH4BXzeJv6HUuKSbh88KbIzUMsdqww50JyC7FCIrgN1YjczgyBBkNSbIQxokjUcR8LHu5sezQT1D9g-2iYWhVcyKyQk0hNOgu2I8nnvv0rdFWyGnfQZ8s68QmxB4Nwk5QQnYtK9XUnOxriaMiTjvXt8n8gbsWCE-yNv_wkdBJ6pemVPMwzIofCRywSVvPv3o708my2yh-lNK7Q4mAaZ2ElooMkKwAk-F7n1KJp93RiFAwxG0L9MQHJTYAp6XTWanGrbakdccmc" />
+              <Image alt="Investor Avatar" width={64} height={64} className="w-full h-full bg-surface-container-high object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsueH4BXzeJv6HUuKSbh88KbIzUMsdqww50JyC7FCIrgN1YjczgyBBkNSbIQxokjUcR8LHu5sezQT1D9g-2iYWhVcyKyQk0hNOgu2I8nnvv0rdFWyGnfQZ8s68QmxB4Nwk5QQnYtK9XUnOxriaMiTjvXt8n8gbsWCE-yNv_wkdBJ6pemVPMwzIofCRywSVvPv3o708my2yh-lNK7Q4mAaZ2ElooMkKwAk-F7n1KJp93RiFAwxG0L9MQHJTYAp6XTWanGrbakdccmc" />
             </div>
             <h3 className="font-headline font-bold text-[#00ffd1] text-lg">Sovereign Command</h3>
             <span className="text-[10px] text-slate-500 tracking-widest uppercase">Elite Level</span>

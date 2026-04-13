@@ -2,7 +2,7 @@ export function WhoAreYou() {
   return (
     <section className="py-24 px-6 container mx-auto">
       <div className="text-right mb-16">
-        <span className="font-data text-xs text-primary-container block mb-2 tracking-[0.3em] uppercase">// اختر مسارك</span>
+        <span className="font-data text-xs text-primary-container block mb-2 tracking-[0.3em] uppercase">— اختر مسارك</span>
         <h2 className="font-headline text-5xl md:text-6xl font-bold text-white">من أنت؟</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

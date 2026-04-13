@@ -7,17 +7,20 @@ import { register } from '@/app/auth/actions';
 export default function RegisterPage() {
   const [role, setRole] = useState<'founder' | 'investor'>('founder');
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.set('role', role);
-    setError(null);
+    setSuccessMessage(null);
     startTransition(async () => {
       const result = await register(formData);
       if (result?.error) {
         setError(result.error);
+      } else if (result?.message) {
+        setSuccessMessage(result.message);
       }
     });
   }
@@ -83,8 +86,15 @@ export default function RegisterPage() {
 
           {/* Error */}
           {error && (
-            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-sm font-body text-right">
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-100 text-sm font-body text-right">
               {error}
+            </div>
+          )}
+
+          {/* Success */}
+          {successMessage && !error && (
+            <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-body text-right">
+              {successMessage}
             </div>
           )}
 

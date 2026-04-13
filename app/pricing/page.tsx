@@ -44,7 +44,7 @@ export default function PricingPage() {
 
       <main className="container mx-auto px-6 pt-32 pb-24 relative z-10">
         <header className="mb-20 text-center">
-          <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">// استثمار في مستقبلك</span>
+          <span className="font-data text-xs text-primary-container block mb-3 tracking-[0.3em] uppercase opacity-50">{/* // استثمار في مستقبلك */}</span>
           <h1 className="font-headline text-5xl md:text-7xl font-black text-white uppercase tracking-tight mb-8">خطط العضوية</h1>
           
           {/* Billing Switcher */}
@@ -97,9 +97,9 @@ export default function PricingPage() {
                 ))}
               </div>
 
-              <button className={`w-full py-5 font-black text-lg clip-button transition-all active:scale-95 ${plan.featured ? 'bg-primary-container text-background shadow-[0_0_20px_#00ffd1] hover:brightness-110' : 'bg-white/5 text-white hover:bg-white/10'}`}>
+              <Link href="/register" className={`w-full py-5 font-black text-lg clip-button transition-all active:scale-95 text-center block ${plan.featured ? 'bg-primary-container text-background shadow-[0_0_20px_#00ffd1] hover:brightness-110' : 'bg-white/5 text-white hover:bg-white/10'}`}>
                 {plan.cta}
-              </button>
+              </Link>
             </div>
           ))}
         </div>

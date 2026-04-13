@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const orbitron = Orbitron({
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground font-body">
         {children}
         <Toaster position="bottom-right" theme="dark" />
+        <Analytics />
       </body>
     </html>
   );

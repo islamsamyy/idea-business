@@ -186,74 +186,53 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Minimalist Tech Bar */}
-          <div className="w-full max-w-7xl border-y border-white/5 py-10">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-10 opacity-40 hover:opacity-100 transition-opacity duration-700">
+          {/* Interactive Tech Bar with Animation */}
+          <div className="w-full max-w-7xl border-y border-white/5 py-10 group">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
               {[
-                { label: "AI Verification", val: "Active" },
-                { label: "Legal Framework", val: "KSA Standard" },
-                { label: "Data Encryption", val: "AES-256" },
-                { label: "Matchmaking", val: "Real-time" },
-                { label: "Support", val: "24/7 Elite" },
+                { label: "AI Verification", val: "Active", icon: "smart_toy" },
+                { label: "Legal Framework", val: "KSA Standard", icon: "gavel" },
+                { label: "Data Encryption", val: "AES-256", icon: "lock" },
+                { label: "Matchmaking", val: "Real-time", icon: "favorite_border" },
+                { label: "Support", val: "24/7 Elite", icon: "support_agent" },
               ].map((item, i) => (
-                <div key={i} className="flex flex-col gap-1 items-center md:items-start">
-                  <span className="text-[10px] font-data tracking-widest uppercase text-[#00ffd1]">{item.label}</span>
-                  <span className="text-sm font-medium text-white">{item.val}</span>
+                <div key={i} className="flex flex-col gap-3 items-center md:items-start p-4 rounded-lg hover:bg-white/5 transition-all group cursor-pointer">
+                  <span className="material-symbols-outlined text-2xl text-primary-container opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                    {item.icon}
+                  </span>
+                  <span className="text-[10px] font-data tracking-widest uppercase text-primary-container opacity-60 group-hover:opacity-100 transition-opacity">{item.label}</span>
+                  <span className="text-sm font-black text-white group-hover:text-primary-container transition-colors">{item.val}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Live Performance Stats */}
-        <section className="w-full border-b border-white/5 py-16 bg-white/[0.01]">
-          <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+        {/* Live Performance Stats - Enhanced */}
+        <section className="w-full border-b border-white/5 py-20 bg-white/[0.01] relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-secondary-container/5 blur-[100px] rounded-full"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-tertiary-fixed-dim/3 blur-[100px] rounded-full"></div>
+          </div>
+          <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
             {stats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center md:items-start gap-2 group cursor-default">
-                <span className={`font-data text-4xl md:text-5xl ${stat.color} font-bold tracking-tighter group-hover:scale-110 transition-transform duration-500`}>
-                  {stat.value}
-                </span>
-                <span className="text-slate-500 font-medium font-headline tracking-wide text-sm opacity-60">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Professional Path Gate */}
-        <section className="py-32 px-6 container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <div className="max-w-2xl text-right">
-              <h2 className="font-headline text-5xl md:text-7xl font-semibold text-white tracking-tight mb-6">
-                بوابتك نحو <span className="text-[#00ffd1]">التأثير.</span>
-              </h2>
-              <p className="text-xl text-slate-500 font-light">اختر هويتك الاستثمارية لنرشدك إلى المسار الأكثر كفاءة وموثوقية.</p>
-            </div>
-            <div className="font-data text-[#00ffd1] text-xs tracking-[0.4em] uppercase opacity-40">Identity Selection // ID_REQ</div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {paths.map((path, i) => (
-              <div
-                key={i}
-                className={`group relative p-12 h-full border border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-3xl transition-all duration-700 hover:border-[#00ffd1]/30 hover:bg-white/[0.04] ${path.featured ? "ring-1 ring-[#00ffd1]/20" : ""}`}
-              >
-                <div className="relative z-10 flex flex-col h-full text-right">
-                  <div className={`w-16 h-16 rounded-2xl ${path.bg} flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform duration-500`}>
-                    <span className={`material-symbols-outlined text-4xl text-${path.color}`}>
-                      {path.icon}
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-semibold mb-6 text-white font-headline">
-                    {path.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed font-body text-lg opacity-80 mb-10">
-                    {path.description}
-                  </p>
-                  <div className="mt-auto pt-6 border-t border-white/5 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[10px] font-data text-[#00ffd1] tracking-widest uppercase">Start Journey</span>
-                    <span className="material-symbols-outlined text-[#00ffd1] -rotate-180">arrow_forward</span>
+              <div key={i} className="group cursor-default">
+                <div className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-white/30 transition-all hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(0,255,209,0.1)]">
+                  <div className="flex flex-col items-start gap-4">
+                    <div className="relative">
+                      <span className={`font-data text-5xl md:text-6xl ${stat.color} font-black tracking-tighter group-hover:scale-115 transition-transform duration-500 origin-left`}>
+                        {stat.value}
+                      </span>
+                      <div className={`absolute -inset-4 ${stat.color} opacity-20 blur-xl group-hover:opacity-30 transition-opacity -z-10 rounded-full`}></div>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 font-medium font-headline tracking-wide text-sm block opacity-70 group-hover:opacity-100 transition-opacity">
+                        {stat.label}
+                      </span>
+                      <span className="text-xs text-slate-600 font-data uppercase tracking-widest mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Updated Live
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -261,39 +240,156 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Core Ecosystem Features */}
-        <section className="py-32 px-6 bg-white/[0.01] relative overflow-hidden border-y border-white/5">
-          <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+        {/* Professional Path Gate - Enhanced */}
+        <section className="py-40 px-6 container mx-auto relative">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/3 -left-20 w-80 h-80 bg-primary-container/5 blur-[150px] rounded-full"></div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8 relative z-10">
+            <div className="max-w-2xl text-right">
+              <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+                Choose Role // Identity Path
+              </div>
+              <h2 className="font-headline text-5xl md:text-7xl font-semibold text-white tracking-tight mb-6">
+                بوابتك نحو <span className="text-[#00ffd1]">التأثير.</span>
+              </h2>
+              <p className="text-xl text-slate-400 font-light">اختر هويتك الاستثمارية لنرشدك إلى المسار الأكثر كفاءة وموثوقية.</p>
+            </div>
+            <div className="font-data text-[#00ffd1] text-xs tracking-[0.4em] uppercase opacity-40">Identity Selection // ID_REQ</div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            {paths.map((path, i) => (
+              <Link
+                key={i}
+                href={path.featured ? "/add-idea" : i === 0 ? "/opportunities" : "/"}
+                className={`group relative overflow-hidden rounded-3xl transition-all duration-700 h-full transform hover:-translate-y-3 ${path.featured ? "md:scale-105" : ""}`}
+              >
+                <div className={`h-full p-12 border backdrop-blur-sm rounded-3xl flex flex-col transition-all duration-700 ${
+                  path.featured
+                    ? "border-primary-container/50 bg-gradient-to-br from-primary-container/20 to-primary-container/5 shadow-[0_0_40px_rgba(0,255,209,0.2)] hover:shadow-[0_0_60px_rgba(0,255,209,0.3)]"
+                    : "border-white/5 bg-gradient-to-br from-white/[0.05] to-white/[0.02] hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+                }`}>
+                  <div className="relative z-10 flex flex-col h-full text-right">
+                    {/* Icon Container */}
+                    <div className={`w-20 h-20 rounded-2xl ${path.bg} flex items-center justify-center mb-8 border border-white/5 group-hover:scale-125 group-hover:shadow-[0_0_25px_rgba(0,255,209,0.3)] transition-all duration-500 relative`}>
+                      <span className={`material-symbols-outlined text-5xl text-${path.color} group-hover:animate-pulse`}>
+                        {path.icon}
+                      </span>
+                      <div className={`absolute inset-0 ${path.bg} opacity-20 blur-lg -z-10 rounded-2xl group-hover:opacity-40 transition-opacity`}></div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-3xl font-semibold mb-6 text-white font-headline group-hover:translate-x-2 transition-transform duration-500">
+                      {path.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-400 leading-relaxed font-body text-lg opacity-80 mb-10 group-hover:text-slate-300 transition-colors">
+                      {path.description}
+                    </p>
+
+                    {/* CTA */}
+                    <div className="mt-auto pt-8 border-t border-white/10 group-hover:border-primary-container/30 transition-colors">
+                      <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <span className="text-[10px] font-data text-primary-container tracking-widest uppercase animate-fade-in">ابدأ الرحلة</span>
+                        <span className="material-symbols-outlined text-primary-container -rotate-180 group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                      </div>
+                      {path.featured && (
+                        <div className="absolute top-6 right-6 px-3 py-1 bg-primary-container/20 border border-primary-container/30 rounded-full">
+                          <span className="text-xs font-black text-primary-container uppercase tracking-widest">مميز</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Core Ecosystem Features - Enhanced */}
+        <section className="py-40 px-6 bg-white/[0.01] relative overflow-hidden border-y border-white/5">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-1/4 right-0 w-96 h-96 bg-secondary-container/5 blur-[150px] rounded-full"></div>
+            <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary-container/3 blur-[150px] rounded-full opacity-30"></div>
+          </div>
+
+          <div className="container mx-auto relative z-10">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
               <div className="max-w-2xl text-right">
+                <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+                  Capabilities // System Core
+                </div>
                 <h2 className="font-headline text-5xl md:text-7xl font-semibold text-white tracking-tight mb-6">
-                  التميز <span className="opacity-30 italic">التقني.</span>
+                  التميز <span className="opacity-40 italic">التقني.</span>
                 </h2>
-                <p className="text-xl text-slate-500 font-light">بنية تحتية متطورة تضمن كفاءة الربط بين الموارد والطموح.</p>
+                <p className="text-xl text-slate-400 font-light">بنية تحتية متطورة تضمن كفاءة الربط بين الموارد والطموح والفرص الحقيقية.</p>
               </div>
               <div className="font-data text-[#00ffd1] text-xs tracking-[0.4em] uppercase opacity-40">System Core // v3.0</div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feat, i) => (
                 <div
                   key={i}
-                  className="group p-10 relative overflow-hidden transition-all duration-500 hover:bg-white/[0.02] text-right"
+                  className="group relative overflow-hidden transition-all duration-500 cursor-pointer h-full"
                 >
-                  <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-white/5 group-hover:border-[#00ffd1]/30 transition-all duration-700"></div>
-                  <div className="text-[#00ffd1] mb-8 opacity-60 group-hover:opacity-100 transition-opacity">
-                    <span className="material-symbols-outlined text-5xl font-light">
-                      {feat.icon}
-                    </span>
+                  {/* Card */}
+                  <div className="p-12 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 h-full flex flex-col text-right group-hover:border-primary-container/30 group-hover:bg-white/[0.08] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,255,209,0.1)]">
+                    {/* Corner Accent */}
+                    <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary-container opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-br-3xl"></div>
+
+                    {/* Icon */}
+                    <div className="mb-8 relative z-10">
+                      <span className={`material-symbols-outlined text-6xl font-light text-primary-container opacity-60 group-hover:opacity-100 group-hover:scale-125 group-hover:drop-shadow-[0_0_20px_rgba(0,255,209,0.4)] transition-all duration-500`}>
+                        {feat.icon}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="text-3xl font-black text-white mb-6 font-headline tracking-tight group-hover:text-primary-container transition-colors duration-500 relative z-10">
+                      {feat.title}
+                    </h4>
+
+                    {/* Description */}
+                    <p className="text-slate-400 font-body leading-relaxed text-lg opacity-80 group-hover:text-slate-300 transition-all duration-500 relative z-10 flex-grow">
+                      {feat.description}
+                    </p>
+
+                    {/* Bottom CTA - Hidden by default */}
+                    <div className="mt-8 pt-8 border-t border-white/5 group-hover:border-primary-container/30 transition-colors opacity-0 group-hover:opacity-100 duration-500 relative z-10">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-data text-primary-container uppercase tracking-widest animate-fade-in">اكتشف المزيد</span>
+                        <span className="material-symbols-outlined text-primary-container group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-2xl font-semibold text-white mb-4 font-headline tracking-tight group-hover:translate-x-2 transition-transform duration-500">
-                    {feat.title}
-                  </h4>
-                  <p className="text-slate-500 font-body leading-relaxed text-lg opacity-80">
-                    {feat.description}
-                  </p>
                 </div>
               ))}
+            </div>
+
+            {/* Extra Feature Highlight */}
+            <div className="mt-20 p-12 bg-gradient-to-r from-primary-container/10 via-transparent to-secondary-container/10 border border-primary-container/20 rounded-3xl relative overflow-hidden group cursor-pointer transition-all hover:border-primary-container/40 hover:shadow-[0_0_40px_rgba(0,255,209,0.15)]">
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-primary-container/20 blur-[80px] rounded-full"></div>
+              </div>
+              <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                <div className="text-right flex-1">
+                  <h3 className="text-3xl font-black text-white font-headline mb-3 group-hover:text-primary-container transition-colors">
+                    خصوصية من المستوى العسكري
+                  </h3>
+                  <p className="text-slate-400 text-lg leading-relaxed">
+                    تشفير من الطراز العالمي (AES-256) لجميع البيانات والمعاملات مع امتثال كامل للمعايير الدولية والسعودية.
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <span className="material-symbols-outlined text-7xl text-primary-container opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500">
+                    shield_lock
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -301,55 +397,82 @@ export default async function HomePage() {
         {/* Dynamic Interactive Steps */}
         <HowItWorks />
 
-        {/* Strategic Saudi Hub Section */}
-        <section className="py-32 relative overflow-hidden">
-          <div className="container mx-auto px-6">
+        {/* Strategic Saudi Hub Section - Enhanced */}
+        <section className="py-40 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container/5 blur-[140px] rounded-full"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-10 text-right">
                 <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase">
-                  Future Vision // 2030
+                  Future Vision // 2030 Strategy
                 </div>
                 <h2 className="text-5xl md:text-7xl font-headline font-semibold leading-tight text-white">
-                  نحن لا نبني منصة، 
+                  نحن لا نبني منصة،
                   <br />
-                  <span className="text-[#00ffd1]">بل نصمم اقتصاد الغد.</span>
+                  <span className="text-[#00ffd1] animate-pulse">بل نصمم اقتصاد الغد.</span>
                 </h2>
-                <p className="text-xl text-slate-400 font-light leading-relaxed max-w-xl ml-auto">
-                  تلتزم IDEA BUSINESS بتمكين العقول السعودية وربطها بالموارد التي تحتاجها للنمو. من قلب الرياض، نفتح آفاقاً جديدة للاستثمار الجريء والنمو المستدام وفق معايير عالمية.
+                <p className="text-xl text-slate-400 font-light leading-relaxed max-w-xl ml-auto group hover:text-slate-300 transition-colors">
+                  تلتزم IDEA BUSINESS بتمكين العقول السعودية وربطها بالموارد التي تحتاجها للنمو. من قلب الرياض، نفتح آفاقاً جديدة للاستثمار الجريء والنمو المستدام وفق معايير عالمية مرموقة.
                 </p>
-                <div className="flex justify-end gap-12 pt-4">
-                  <div>
-                    <span className="text-4xl font-data text-white block mb-2 font-bold tracking-tighter">100%</span>
-                    <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-60">Saudi DNA</span>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-2 gap-8 pt-8">
+                  <div className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-primary-container/30 hover:bg-primary-container/10 transition-all cursor-default">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="material-symbols-outlined text-primary-container text-2xl group-hover:scale-125 transition-transform">
+                        public
+                      </span>
+                      <span className="text-4xl font-data text-white font-bold group-hover:text-primary-container transition-colors">100%</span>
+                    </div>
+                    <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-70 block">Saudi DNA</span>
                   </div>
-                  <div>
-                    <span className="text-4xl font-data text-[#00ffd1] block mb-2 font-bold tracking-tighter">Elite</span>
-                    <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-60">Network</span>
+
+                  <div className="group p-6 bg-white/5 border border-white/10 rounded-xl hover:border-secondary-fixed-dim/30 hover:bg-secondary-fixed-dim/10 transition-all cursor-default">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="material-symbols-outlined text-secondary-fixed-dim text-2xl group-hover:scale-125 transition-transform">
+                        groups
+                      </span>
+                      <span className="text-4xl font-data text-white font-bold group-hover:text-secondary-fixed-dim transition-colors">Elite</span>
+                    </div>
+                    <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-70 block">Network</span>
                   </div>
                 </div>
               </div>
-              
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#00ffd1]/10 to-transparent blur-3xl opacity-20"></div>
-                <div className="relative p-12 border border-white/10 rounded-[3rem] bg-black/40 backdrop-blur-2xl overflow-hidden group">
+
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary-container/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[3rem]"></div>
+                <div className="relative p-12 border border-white/10 group-hover:border-primary-container/30 rounded-[3rem] bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-2xl overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,255,209,0.1)]">
+                  {/* Animated Corner */}
                   <div className="absolute top-0 right-0 p-8">
-                    <span className="text-[40px] font-data text-[#00ffd1]/10 leading-none">01</span>
-                  </div>
-                  <div className="space-y-8 text-right">
-                    <div className="flex items-center justify-end gap-3">
-                      <span className="font-data text-[10px] text-[#00ffd1] tracking-widest uppercase">System Message</span>
-                      <div className="h-2 w-2 rounded-full bg-[#00ffd1]"></div>
+                    <div className="relative">
+                      <span className="text-[40px] font-data text-[#00ffd1]/20 leading-none group-hover:text-[#00ffd1]/40 transition-colors">01</span>
+                      <div className="absolute inset-0 text-[#00ffd1] opacity-0 group-hover:opacity-30 blur-xl"></div>
                     </div>
-                    <p className="text-3xl font-light text-white/90 leading-snug italic font-headline">
+                  </div>
+
+                  <div className="space-y-8 text-right">
+                    {/* Live Badge */}
+                    <div className="flex items-center justify-end gap-3">
+                      <span className="font-data text-[10px] text-primary-container tracking-widest uppercase font-black">System Message</span>
+                      <div className="h-2 w-2 rounded-full bg-primary-container animate-pulse"></div>
+                    </div>
+
+                    {/* Quote */}
+                    <p className="text-3xl font-light text-white/95 leading-snug italic font-headline hover:text-primary-container/80 transition-colors">
                       "هدفنا هو جعل المملكة العربية السعودية الوجهة الأولى عالمياً للاستثمار في الأفكار الريادية والذكاء الاصطناعي."
                     </p>
-                    <div className="flex items-center justify-end gap-5 pt-6">
+
+                    {/* Authority Badge */}
+                    <div className="flex items-center justify-end gap-6 pt-6 border-t border-white/10">
                       <div className="text-right">
-                        <div className="text-white text-lg font-semibold tracking-wide">القيادة الاستراتيجية</div>
-                        <div className="text-slate-500 text-xs font-data uppercase tracking-[0.2em]">Vision 2030 Alignment</div>
+                        <div className="text-white text-lg font-bold tracking-wide">القيادة الاستراتيجية</div>
+                        <div className="text-slate-500 text-xs font-data uppercase tracking-[0.2em] mt-1">Vision 2030 Alignment</div>
                       </div>
-                      <div className="h-14 w-14 rounded-full bg-[#00ffd1]/10 border border-[#00ffd1]/20 flex items-center justify-center overflow-hidden">
-                        <span className="material-symbols-outlined text-[#00ffd1] text-2xl">verified</span>
+                      <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary-container/20 to-primary-container/5 border border-primary-container/30 flex items-center justify-center overflow-hidden group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(0,255,209,0.3)] transition-all">
+                        <span className="material-symbols-outlined text-primary-container text-3xl font-light">verified_user</span>
                       </div>
                     </div>
                   </div>
@@ -359,26 +482,75 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Global Hub Final Call */}
-        <section className="py-40 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#00ffd1]/5 blur-[120px] rounded-full pointer-events-none"></div>
+        {/* Global Hub Final Call - Enhanced */}
+        <section className="py-48 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-container/5 blur-[150px] rounded-full"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-container/5 blur-[100px] rounded-full"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-tertiary-fixed-dim/3 blur-[100px] rounded-full opacity-50"></div>
+          </div>
+
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <div className="max-w-4xl mx-auto space-y-12">
-              <div className="font-data text-[11px] text-[#00ffd1] tracking-[0.5em] uppercase opacity-60">Global Network // Saudi Innovation</div>
-              <h2 className="text-6xl md:text-8xl font-headline font-semibold text-white leading-tight">
-                العالم ينتظر <br /><span className="text-[#00ffd1]">فكرتك القادمة.</span>
-              </h2>
-              <p className="text-2xl text-slate-400 font-light leading-relaxed opacity-70">
-                انضم إلى أكبر تجمع استثماري في الشرق الأوسط وابدأ رحلة التحول الرقمي والمالي اليوم.
-              </p>
-              <div className="pt-10 text-right flex justify-center">
+            <div className="max-w-5xl mx-auto space-y-16">
+              <div className="inline-block px-6 py-2 border border-primary-container/30 bg-primary-container/10 rounded-full font-data text-[11px] text-primary-container tracking-[0.5em] uppercase font-black animate-fade-in">
+                Global Network // Saudi Innovation Hub
+              </div>
+
+              <div className="space-y-6">
+                <h2 className="text-6xl md:text-8xl font-headline font-black text-white leading-tight tracking-tight">
+                  العالم ينتظر
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffd1] via-[#00ffd1] to-secondary-fixed-dim animate-pulse">
+                    فكرتك القادمة.
+                  </span>
+                </h2>
+                <p className="text-2xl text-slate-300 font-light leading-relaxed opacity-90 max-w-3xl mx-auto">
+                  انضم إلى أكبر تجمع استثماري في الشرق الأوسط وابدأ رحلة التحول الرقمي والمالي اليوم. مع آلاف الرواد والمستثمرين المنتظرين لأفكارك.
+                </p>
+              </div>
+
+              {/* Dual CTA */}
+              <div className="pt-8 flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
-                  href="/register"
-                  className="inline-flex items-center gap-4 px-16 py-8 bg-white text-black font-bold text-2xl rounded-full hover:scale-110 active:scale-95 transition-all shadow-[0_30px_60px_rgba(255,255,255,0.15)] group"
+                  href="/opportunities"
+                  className="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-black text-xl rounded-full hover:scale-105 active:scale-95 transition-all shadow-[0_30px_60px_rgba(255,255,255,0.2)] overflow-hidden"
                 >
-                  <span className="material-symbols-outlined font-black text-3xl group-hover:-translate-x-2 transition-transform rotate-180">arrow_outward</span>
-                  ابدأ الآن مجاناً
+                  <div className="absolute inset-0 bg-gradient-to-r from-white via-primary-container to-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                  <span className="relative flex items-center gap-3">
+                    <span className="material-symbols-outlined font-black text-2xl group-hover:scale-125 transition-transform">search</span>
+                    اكتشف الفرص
+                  </span>
                 </Link>
+
+                <Link
+                  href="/add-idea"
+                  className="group relative inline-flex items-center gap-4 px-12 py-6 border-2 border-white bg-transparent text-white font-black text-xl rounded-full hover:bg-white/10 active:scale-95 transition-all"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></div>
+                  <span className="relative flex items-center gap-3">
+                    <span className="material-symbols-outlined font-black text-2xl group-hover:rotate-180 transition-transform">add_circle</span>
+                    اطرح فكرتك
+                  </span>
+                </Link>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-primary-container/30 transition-all group cursor-default">
+                  <span className="material-symbols-outlined text-3xl text-primary-container mb-3 block group-hover:scale-110 transition-transform">shield_verified</span>
+                  <h4 className="text-white font-black mb-2 text-lg">موثوق ومأمون</h4>
+                  <p className="text-slate-500 text-sm">معايير أمان عالمية</p>
+                </div>
+                <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-secondary-fixed-dim/30 transition-all group cursor-default">
+                  <span className="material-symbols-outlined text-3xl text-secondary-fixed-dim mb-3 block group-hover:scale-110 transition-transform">speed</span>
+                  <h4 className="text-white font-black mb-2 text-lg">سريع وفعال</h4>
+                  <p className="text-slate-500 text-sm">من الفكرة للصفقة في أسابيع</p>
+                </div>
+                <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-tertiary-fixed-dim/30 transition-all group cursor-default">
+                  <span className="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block group-hover:scale-110 transition-transform">support_agent</span>
+                  <h4 className="text-white font-black mb-2 text-lg">دعم متكامل</h4>
+                  <p className="text-slate-500 text-sm">فريق متخصص يساعدك دائماً</p>
+                </div>
               </div>
             </div>
           </div>

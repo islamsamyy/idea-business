@@ -132,13 +132,13 @@ export default async function HomePage() {
 
   return (
     <div
-      className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right"
+      className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 text-slate-900 font-body min-h-screen relative overflow-x-hidden text-right"
       dir="rtl"
     >
-      <div className="fixed inset-0 neon-grid pointer-events-none z-0 opacity-20"></div>
-      <div className="fixed inset-0 scanline pointer-events-none z-0 opacity-5"></div>
-      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-secondary-container/10 blur-[150px] -z-10 rounded-full"></div>
-      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-primary-container/10 blur-[150px] -z-10 rounded-full"></div>
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-40" style={{backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%)' }}></div>
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-30" style={{backgroundImage: 'radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%)' }}></div>
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-cyan-200/15 blur-[150px] -z-10 rounded-full"></div>
+      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-indigo-200/15 blur-[150px] -z-10 rounded-full"></div>
 
       <Navbar />
 
@@ -146,21 +146,21 @@ export default async function HomePage() {
         {/* Hero Section */}
         <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center items-center px-6 text-center relative overflow-hidden pt-32 pb-20">
           {/* Futuristic Status Badge */}
-          <div className="mb-12 inline-flex items-center gap-3 px-6 py-2 border border-[#00ffd1]/20 bg-black/40 backdrop-blur-md rounded-full text-[11px] font-data tracking-[0.3em] uppercase text-[#00ffd1] animate-fade-in">
+          <div className="mb-12 inline-flex items-center gap-3 px-6 py-2 border border-[#0ea5e9]/20 bg-black/40 backdrop-blur-md rounded-full text-[11px] font-data tracking-[0.3em] uppercase text-[#0ea5e9] animate-fade-in">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ffd1] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ffd1]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0ea5e9] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0ea5e9]"></span>
             </span>
             Platform Status: Operational // AI Powered
           </div>
 
-          <h1 className="font-headline text-6xl md:text-9xl font-semibold leading-[1.1] mb-10 max-w-7xl tracking-[-0.04em] text-white">
-            اصنع <span className="text-[#00ffd1] font-light italic">مستقبلك</span> الاستثماري
+          <h1 className="font-headline text-6xl md:text-9xl font-semibold leading-[1.1] mb-10 max-w-7xl tracking-[-0.04em] text-slate-900">
+            اصنع <span className="text-[#0ea5e9] font-light italic">مستقبلك</span> الاستثماري
             <br />
             <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">في قلب رؤية 2030</span>
           </h1>
 
-          <p className="text-slate-400 text-lg md:text-2xl max-w-4xl mb-16 font-body leading-relaxed opacity-70 font-light">
+          <p className="text-slate-600 text-lg md:text-2xl max-w-4xl mb-16 font-body leading-relaxed opacity-70 font-light">
             بيئة سيادية آمنة تجمع بين طموح الرواد وذكاء المستثمرين. نوظف تقنيات الذكاء الاصطناعي لاختيار الفرص الأكثر نمواً وتأثيراً في الاقتصاد الجديد.
           </p>
 
@@ -169,7 +169,7 @@ export default async function HomePage() {
               href="/opportunities"
               className="group relative px-14 py-6 bg-white text-black font-semibold text-xl rounded-full transition-all hover:scale-105 active:scale-95 overflow-hidden shadow-[0_20px_50px_rgba(255,255,255,0.1)]"
             >
-              <div className="absolute inset-0 bg-[#00ffd1] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <div className="absolute inset-0 bg-[#0ea5e9] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               <span className="relative z-10 flex items-center gap-3 group-hover:text-black transition-colors">
                 اكتشف الفرص الحالية
                 <span className="material-symbols-outlined font-black text-2xl">arrow_outward</span>
@@ -177,11 +177,11 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/add-idea"
-              className="group relative px-14 py-6 border border-white/10 bg-white/5 backdrop-blur-sm text-white font-semibold text-xl rounded-full transition-all hover:border-[#00ffd1]/50 hover:bg-white/10 active:scale-95"
+              className="group relative px-14 py-6 border border-white/10 bg-white/5 backdrop-blur-sm text-slate-900 font-semibold text-xl rounded-full transition-all hover:border-[#0ea5e9]/50 hover:bg-white/10 active:scale-95"
             >
               <span className="flex items-center gap-3">
                 اطرح مشروعك الآن
-                <span className="material-symbols-outlined font-black text-2xl text-[#00ffd1]">add_circle</span>
+                <span className="material-symbols-outlined font-black text-2xl text-[#0ea5e9]">add_circle</span>
               </span>
             </Link>
           </div>
@@ -201,7 +201,7 @@ export default async function HomePage() {
                     {item.icon}
                   </span>
                   <span className="text-[10px] font-data tracking-widest uppercase text-primary-container opacity-60 group-hover:opacity-100 transition-opacity">{item.label}</span>
-                  <span className="text-sm font-black text-white group-hover:text-primary-container transition-colors">{item.val}</span>
+                  <span className="text-sm font-black text-slate-900 group-hover:text-primary-container transition-colors">{item.val}</span>
                 </div>
               ))}
             </div>
@@ -226,7 +226,7 @@ export default async function HomePage() {
                       <div className={`absolute -inset-4 ${stat.color} opacity-20 blur-xl group-hover:opacity-30 transition-opacity -z-10 rounded-full`}></div>
                     </div>
                     <div>
-                      <span className="text-slate-400 font-medium font-headline tracking-wide text-sm block opacity-70 group-hover:opacity-100 transition-opacity">
+                      <span className="text-slate-600 font-medium font-headline tracking-wide text-sm block opacity-70 group-hover:opacity-100 transition-opacity">
                         {stat.label}
                       </span>
                       <span className="text-xs text-slate-600 font-data uppercase tracking-widest mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -248,15 +248,15 @@ export default async function HomePage() {
 
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8 relative z-10">
             <div className="max-w-2xl text-right">
-              <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+              <div className="inline-block px-4 py-1 border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 rounded-lg font-data text-[10px] text-[#0ea5e9] tracking-[0.3em] uppercase mb-6">
                 Choose Role // Identity Path
               </div>
-              <h2 className="font-headline text-5xl md:text-7xl font-semibold text-white tracking-tight mb-6">
-                بوابتك نحو <span className="text-[#00ffd1]">التأثير.</span>
+              <h2 className="font-headline text-5xl md:text-7xl font-semibold text-slate-900 tracking-tight mb-6">
+                بوابتك نحو <span className="text-[#0ea5e9]">التأثير.</span>
               </h2>
-              <p className="text-xl text-slate-400 font-light">اختر هويتك الاستثمارية لنرشدك إلى المسار الأكثر كفاءة وموثوقية.</p>
+              <p className="text-xl text-slate-600 font-light">اختر هويتك الاستثمارية لنرشدك إلى المسار الأكثر كفاءة وموثوقية.</p>
             </div>
-            <div className="font-data text-[#00ffd1] text-xs tracking-[0.4em] uppercase opacity-40">Identity Selection // ID_REQ</div>
+            <div className="font-data text-[#0ea5e9] text-xs tracking-[0.4em] uppercase opacity-40">Identity Selection // ID_REQ</div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
@@ -281,12 +281,12 @@ export default async function HomePage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-3xl font-semibold mb-6 text-white font-headline group-hover:translate-x-2 transition-transform duration-500">
+                    <h3 className="text-3xl font-semibold mb-6 text-slate-900 font-headline group-hover:translate-x-2 transition-transform duration-500">
                       {path.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-slate-400 leading-relaxed font-body text-lg opacity-80 mb-10 group-hover:text-slate-300 transition-colors">
+                    <p className="text-slate-600 leading-relaxed font-body text-lg opacity-80 mb-10 group-hover:text-slate-300 transition-colors">
                       {path.description}
                     </p>
 
@@ -319,15 +319,15 @@ export default async function HomePage() {
           <div className="container mx-auto relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
               <div className="max-w-2xl text-right">
-                <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+                <div className="inline-block px-4 py-1 border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 rounded-lg font-data text-[10px] text-[#0ea5e9] tracking-[0.3em] uppercase mb-6">
                   Capabilities // System Core
                 </div>
-                <h2 className="font-headline text-5xl md:text-7xl font-semibold text-white tracking-tight mb-6">
+                <h2 className="font-headline text-5xl md:text-7xl font-semibold text-slate-900 tracking-tight mb-6">
                   التميز <span className="opacity-40 italic">التقني.</span>
                 </h2>
-                <p className="text-xl text-slate-400 font-light">بنية تحتية متطورة تضمن كفاءة الربط بين الموارد والطموح والفرص الحقيقية.</p>
+                <p className="text-xl text-slate-600 font-light">بنية تحتية متطورة تضمن كفاءة الربط بين الموارد والطموح والفرص الحقيقية.</p>
               </div>
-              <div className="font-data text-[#00ffd1] text-xs tracking-[0.4em] uppercase opacity-40">System Core // v3.0</div>
+              <div className="font-data text-[#0ea5e9] text-xs tracking-[0.4em] uppercase opacity-40">System Core // v3.0</div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -349,12 +349,12 @@ export default async function HomePage() {
                     </div>
 
                     {/* Title */}
-                    <h4 className="text-3xl font-black text-white mb-6 font-headline tracking-tight group-hover:text-primary-container transition-colors duration-500 relative z-10">
+                    <h4 className="text-3xl font-black text-slate-900 mb-6 font-headline tracking-tight group-hover:text-primary-container transition-colors duration-500 relative z-10">
                       {feat.title}
                     </h4>
 
                     {/* Description */}
-                    <p className="text-slate-400 font-body leading-relaxed text-lg opacity-80 group-hover:text-slate-300 transition-all duration-500 relative z-10 flex-grow">
+                    <p className="text-slate-600 font-body leading-relaxed text-lg opacity-80 group-hover:text-slate-300 transition-all duration-500 relative z-10 flex-grow">
                       {feat.description}
                     </p>
 
@@ -377,10 +377,10 @@ export default async function HomePage() {
               </div>
               <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                 <div className="text-right flex-1">
-                  <h3 className="text-3xl font-black text-white font-headline mb-3 group-hover:text-primary-container transition-colors">
+                  <h3 className="text-3xl font-black text-slate-900 font-headline mb-3 group-hover:text-primary-container transition-colors">
                     خصوصية من المستوى العسكري
                   </h3>
-                  <p className="text-slate-400 text-lg leading-relaxed">
+                  <p className="text-slate-600 text-lg leading-relaxed">
                     تشفير من الطراز العالمي (AES-256) لجميع البيانات والمعاملات مع امتثال كامل للمعايير الدولية والسعودية.
                   </p>
                 </div>
@@ -406,15 +406,15 @@ export default async function HomePage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-20 items-center">
               <div className="space-y-10 text-right">
-                <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase">
+                <div className="inline-block px-4 py-1 border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 rounded-lg font-data text-[10px] text-[#0ea5e9] tracking-[0.3em] uppercase">
                   Future Vision // 2030 Strategy
                 </div>
-                <h2 className="text-5xl md:text-7xl font-headline font-semibold leading-tight text-white">
+                <h2 className="text-5xl md:text-7xl font-headline font-semibold leading-tight text-slate-900">
                   نحن لا نبني منصة،
                   <br />
-                  <span className="text-[#00ffd1] animate-pulse">بل نصمم اقتصاد الغد.</span>
+                  <span className="text-[#0ea5e9] animate-pulse">بل نصمم اقتصاد الغد.</span>
                 </h2>
-                <p className="text-xl text-slate-400 font-light leading-relaxed max-w-xl ml-auto group hover:text-slate-300 transition-colors">
+                <p className="text-xl text-slate-600 font-light leading-relaxed max-w-xl ml-auto group hover:text-slate-300 transition-colors">
                   تلتزم IDEA BUSINESS بتمكين العقول السعودية وربطها بالموارد التي تحتاجها للنمو. من قلب الرياض، نفتح آفاقاً جديدة للاستثمار الجريء والنمو المستدام وفق معايير عالمية مرموقة.
                 </p>
 
@@ -425,7 +425,7 @@ export default async function HomePage() {
                       <span className="material-symbols-outlined text-primary-container text-2xl group-hover:scale-125 transition-transform">
                         public
                       </span>
-                      <span className="text-4xl font-data text-white font-bold group-hover:text-primary-container transition-colors">100%</span>
+                      <span className="text-4xl font-data text-slate-900 font-bold group-hover:text-primary-container transition-colors">100%</span>
                     </div>
                     <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-70 block">Saudi DNA</span>
                   </div>
@@ -435,7 +435,7 @@ export default async function HomePage() {
                       <span className="material-symbols-outlined text-secondary-fixed-dim text-2xl group-hover:scale-125 transition-transform">
                         groups
                       </span>
-                      <span className="text-4xl font-data text-white font-bold group-hover:text-secondary-fixed-dim transition-colors">Elite</span>
+                      <span className="text-4xl font-data text-slate-900 font-bold group-hover:text-secondary-fixed-dim transition-colors">Elite</span>
                     </div>
                     <span className="text-slate-500 text-sm font-headline tracking-wider uppercase opacity-70 block">Network</span>
                   </div>
@@ -448,8 +448,8 @@ export default async function HomePage() {
                   {/* Animated Corner */}
                   <div className="absolute top-0 right-0 p-8">
                     <div className="relative">
-                      <span className="text-[40px] font-data text-[#00ffd1]/20 leading-none group-hover:text-[#00ffd1]/40 transition-colors">01</span>
-                      <div className="absolute inset-0 text-[#00ffd1] opacity-0 group-hover:opacity-30 blur-xl"></div>
+                      <span className="text-[40px] font-data text-[#0ea5e9]/20 leading-none group-hover:text-[#0ea5e9]/40 transition-colors">01</span>
+                      <div className="absolute inset-0 text-[#0ea5e9] opacity-0 group-hover:opacity-30 blur-xl"></div>
                     </div>
                   </div>
 
@@ -461,14 +461,14 @@ export default async function HomePage() {
                     </div>
 
                     {/* Quote */}
-                    <p className="text-3xl font-light text-white/95 leading-snug italic font-headline hover:text-primary-container/80 transition-colors">
+                    <p className="text-3xl font-light text-slate-900/95 leading-snug italic font-headline hover:text-primary-container/80 transition-colors">
                       "هدفنا هو جعل المملكة العربية السعودية الوجهة الأولى عالمياً للاستثمار في الأفكار الريادية والذكاء الاصطناعي."
                     </p>
 
                     {/* Authority Badge */}
                     <div className="flex items-center justify-end gap-6 pt-6 border-t border-white/10">
                       <div className="text-right">
-                        <div className="text-white text-lg font-bold tracking-wide">القيادة الاستراتيجية</div>
+                        <div className="text-slate-900 text-lg font-bold tracking-wide">القيادة الاستراتيجية</div>
                         <div className="text-slate-500 text-xs font-data uppercase tracking-[0.2em] mt-1">Vision 2030 Alignment</div>
                       </div>
                       <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary-container/20 to-primary-container/5 border border-primary-container/30 flex items-center justify-center overflow-hidden group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(0,255,209,0.3)] transition-all">
@@ -497,10 +497,10 @@ export default async function HomePage() {
               </div>
 
               <div className="space-y-6">
-                <h2 className="text-6xl md:text-8xl font-headline font-black text-white leading-tight tracking-tight">
+                <h2 className="text-6xl md:text-8xl font-headline font-black text-slate-900 leading-tight tracking-tight">
                   العالم ينتظر
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffd1] via-[#00ffd1] to-secondary-fixed-dim animate-pulse">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0ea5e9] via-[#0ea5e9] to-secondary-fixed-dim animate-pulse">
                     فكرتك القادمة.
                   </span>
                 </h2>
@@ -524,7 +524,7 @@ export default async function HomePage() {
 
                 <Link
                   href="/add-idea"
-                  className="group relative inline-flex items-center gap-4 px-12 py-6 border-2 border-white bg-transparent text-white font-black text-xl rounded-full hover:bg-white/10 active:scale-95 transition-all"
+                  className="group relative inline-flex items-center gap-4 px-12 py-6 border-2 border-white bg-transparent text-slate-900 font-black text-xl rounded-full hover:bg-white/10 active:scale-95 transition-all"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></div>
                   <span className="relative flex items-center gap-3">
@@ -538,17 +538,17 @@ export default async function HomePage() {
               <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
                 <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-primary-container/30 transition-all group cursor-default">
                   <span className="material-symbols-outlined text-3xl text-primary-container mb-3 block group-hover:scale-110 transition-transform">shield_verified</span>
-                  <h4 className="text-white font-black mb-2 text-lg">موثوق ومأمون</h4>
+                  <h4 className="text-slate-900 font-black mb-2 text-lg">موثوق ومأمون</h4>
                   <p className="text-slate-500 text-sm">معايير أمان عالمية</p>
                 </div>
                 <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-secondary-fixed-dim/30 transition-all group cursor-default">
                   <span className="material-symbols-outlined text-3xl text-secondary-fixed-dim mb-3 block group-hover:scale-110 transition-transform">speed</span>
-                  <h4 className="text-white font-black mb-2 text-lg">سريع وفعال</h4>
+                  <h4 className="text-slate-900 font-black mb-2 text-lg">سريع وفعال</h4>
                   <p className="text-slate-500 text-sm">من الفكرة للصفقة في أسابيع</p>
                 </div>
                 <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] hover:border-tertiary-fixed-dim/30 transition-all group cursor-default">
                   <span className="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block group-hover:scale-110 transition-transform">support_agent</span>
-                  <h4 className="text-white font-black mb-2 text-lg">دعم متكامل</h4>
+                  <h4 className="text-slate-900 font-black mb-2 text-lg">دعم متكامل</h4>
                   <p className="text-slate-500 text-sm">فريق متخصص يساعدك دائماً</p>
                 </div>
               </div>
@@ -583,7 +583,7 @@ export default async function HomePage() {
               { text: "اتصل بنا", href: "/contact" },
               { text: "خارطة الطريق", href: "/roadmap" },
             ].map((link, i) => (
-              <Link key={i} href={link.href} className="text-slate-500 hover:text-white transition-colors font-body text-sm">
+              <Link key={i} href={link.href} className="text-slate-500 hover:text-slate-900 transition-colors font-body text-sm">
                 {link.text}
               </Link>
             ))}
@@ -591,7 +591,7 @@ export default async function HomePage() {
           <div className="flex flex-col gap-4 text-right">
             <h5 className="text-primary-container font-black mb-2 uppercase tracking-widest text-xs">مجالاتنا</h5>
             {["التكنولوجيا المالية", "الطاقة المتجددة", "الذكاء الاصطناعي", "الصحة الرقمية"].map((link, i) => (
-              <Link key={i} href="#" className="text-slate-500 hover:text-white transition-colors font-body text-sm">
+              <Link key={i} href="#" className="text-slate-500 hover:text-slate-900 transition-colors font-body text-sm">
                 {link}
               </Link>
             ))}

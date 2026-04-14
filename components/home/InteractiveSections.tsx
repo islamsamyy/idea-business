@@ -110,17 +110,17 @@ export function HowItWorks() {
   return (
     <section className="py-32 px-6 container mx-auto relative">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 right-20 w-72 h-72 bg-secondary-container/5 blur-[120px] rounded-full"></div>
+        <div className="absolute top-10 right-20 w-72 h-72 bg-cyan-300/10 blur-[120px] rounded-full"></div>
       </div>
 
       <div className="relative z-10 text-right mb-16">
-        <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+        <div className="inline-block px-4 py-1 border border-cyan-300/40 bg-cyan-100 rounded-lg font-data text-[10px] text-cyan-700 tracking-[0.3em] uppercase mb-6">
           Journey // Step by Step
         </div>
-        <h2 className="font-headline text-5xl md:text-7xl font-black text-white uppercase tracking-tight">
-          كيف يعمل <span className="text-primary-container">IDEA BUSINESS</span>؟
+        <h2 className="font-headline text-5xl md:text-7xl font-black text-slate-900 uppercase tracking-tight">
+          كيف يعمل <span className="text-cyan-600">IDEA BUSINESS</span>؟
         </h2>
-        <p className="text-slate-400 text-lg mt-4 max-w-xl ml-auto">رحلة مضمونة من الفكرة إلى الواقع الاستثماري</p>
+        <p className="text-slate-600 text-lg mt-4 max-w-xl ml-auto">رحلة مضمونة من الفكرة إلى الواقع الاستثماري</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -207,21 +207,21 @@ export function TrendingIdeas() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section className="py-32 px-6 bg-surface-container-lowest overflow-hidden relative">
+    <section className="py-32 px-6 bg-gradient-to-br from-blue-50 to-slate-100 overflow-hidden relative">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary-container/5 blur-[150px] rounded-full"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-300/10 blur-[150px] rounded-full"></div>
       </div>
 
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="text-right">
-            <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-4">
+            <div className="inline-block px-4 py-1 border border-indigo-300/40 bg-indigo-100 rounded-lg font-data text-[10px] text-indigo-700 tracking-[0.3em] uppercase mb-4">
               Trending // Hot Opportunities
             </div>
-            <h2 className="font-headline text-5xl md:text-7xl font-black text-white">أفكار مرشحة</h2>
-            <p className="text-slate-400 mt-4 text-lg">أهم الأفكار التي تحظى باهتمام المستثمرين حالياً</p>
+            <h2 className="font-headline text-5xl md:text-7xl font-black text-slate-900">أفكار مرشحة</h2>
+            <p className="text-slate-600 mt-4 text-lg">أهم الأفكار التي تحظى باهتمام المستثمرين حالياً</p>
           </div>
-          <Link href="/opportunities" className="text-primary-container font-black flex items-center gap-2 hover:gap-4 transition-all hover:text-white">
+          <Link href="/opportunities" className="text-cyan-600 font-black flex items-center gap-2 hover:gap-4 transition-all hover:text-cyan-800">
             استعرض الكل
             <span className="material-symbols-outlined animate-float">west</span>
           </Link>
@@ -312,15 +312,15 @@ export function FAQSection() {
   return (
     <section className="py-32 px-6 container mx-auto max-w-5xl relative">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-secondary-container/5 blur-[100px] rounded-full"></div>
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-indigo-300/10 blur-[100px] rounded-full"></div>
       </div>
 
       <div className="relative z-10 text-center mb-16">
-        <div className="inline-block px-4 py-1 border border-[#00ffd1]/20 bg-[#00ffd1]/5 rounded-lg font-data text-[10px] text-[#00ffd1] tracking-[0.3em] uppercase mb-6">
+        <div className="inline-block px-4 py-1 border border-cyan-300/40 bg-cyan-100 rounded-lg font-data text-[10px] text-cyan-700 tracking-[0.3em] uppercase mb-6">
           FAQs // Support Center
         </div>
-        <h2 className="font-headline text-5xl md:text-7xl font-black text-white mb-6">أسئلة شائعة</h2>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto">نجيب على جميع استفسارات الرواد والمستثمرين</p>
+        <h2 className="font-headline text-5xl md:text-7xl font-black text-slate-900 mb-6">أسئلة شائعة</h2>
+        <p className="text-slate-600 text-lg max-w-2xl mx-auto">نجيب على جميع استفسارات الرواد والمستثمرين</p>
       </div>
 
       <div className="space-y-4 relative z-10">

@@ -7,24 +7,24 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
-  --color-primary: #ffffff;
-  --color-primary-foreground: #000000;
-  --color-primary-container: #00ffd1;
-  
-  --color-secondary: #6800ec;
-  --color-secondary-foreground: #ffffff;
-  --color-secondary-container: #1a1a1a;
-  
-  --color-tertiary: #fffeff;
-  --color-tertiary-container: #ffddab;
-  --color-tertiary-fixed-dim: #ffba3a;
 
-  --color-surface-container-lowest: #050608;
-  --color-surface-container-low: #0c0e12;
-  --color-surface-container: #12151c;
-  --color-surface-container-high: #1a1e26;
-  --color-surface-container-highest: #242a33;
+  --color-primary: #0f172a;
+  --color-primary-foreground: #ffffff;
+  --color-primary-container: #0ea5e9;
+
+  --color-secondary: #6366f1;
+  --color-secondary-foreground: #ffffff;
+  --color-secondary-container: #e0e7ff;
+
+  --color-tertiary: #06b6d4;
+  --color-tertiary-container: #cffafe;
+  --color-tertiary-fixed-dim: #06b6d4;
+
+  --color-surface-container-lowest: #f8fafc;
+  --color-surface-container-low: #f1f5f9;
+  --color-surface-container: #e2e8f0;
+  --color-surface-container-high: #cbd5e1;
+  --color-surface-container-highest: #94a3b8;
 
   --font-headline: var(--font-readex-pro), sans-serif;
   --font-body: var(--font-readex-pro), sans-serif;
@@ -35,37 +35,37 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-input: rgba(255, 255, 255, 0.05);
-  --color-ring: #00ffd1;
-  --color-muted: #1c2027;
-  --color-muted-foreground: #94a3b8;
-  --color-accent: #00ffd1;
-  --color-accent-foreground: #000000;
 
-  --shadow-neon: 0 0 30px rgba(0, 255, 209, 0.2);
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-input: rgba(15, 23, 42, 0.08);
+  --color-ring: #0ea5e9;
+  --color-muted: #e2e8f0;
+  --color-muted-foreground: #64748b;
+  --color-accent: #0ea5e9;
+  --color-accent-foreground: #ffffff;
+
+  --shadow-light: 0 0 30px rgba(14, 165, 233, 0.15);
 }
 
 :root {
-  --background: #050608;
-  --foreground: #f8fafc;
-  
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  
-  --secondary: #6800ec;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --primary: #0f172a;
+  --primary-foreground: #ffffff;
+
+  --secondary: #6366f1;
   --secondary-foreground: #ffffff;
-  
-  --muted: #0f172a;
-  --muted-foreground: #94a3b8;
-  
-  --accent: #00ffd1;
-  --accent-foreground: #000000;
-  
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: #00ffd1;
+
+  --muted: #e2e8f0;
+  --muted-foreground: #64748b;
+
+  --accent: #0ea5e9;
+  --accent-foreground: #ffffff;
+
+  --border: rgba(15, 23, 42, 0.12);
+  --input: rgba(15, 23, 42, 0.08);
+  --ring: #0ea5e9;
 
   --radius: 8px;
 }

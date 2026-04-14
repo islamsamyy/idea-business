@@ -30,15 +30,15 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${inter.variable} ${readexPro.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${readexPro.variable} h-full antialiased`}
     >
       <head>
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#050608] text-[#f8fafc] font-body selection:bg-[#00ffd1]/30 selection:text-[#00ffd1]">
+      <body className="min-h-full flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 text-slate-900 font-body selection:bg-cyan-200/60 selection:text-cyan-900">
         {children}
-        <Toaster position="bottom-right" theme="dark" />
+        <Toaster position="bottom-right" theme="light" />
         <Analytics />
         <SpeedInsights />
       </body>

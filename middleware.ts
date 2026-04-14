@@ -42,6 +42,8 @@ export default async function middleware(request: NextRequest) {
     '/saved',
     '/funding-progress',
     '/checkout',
+    '/admin',
+    '/notifications',
   ]
 
   const isProtectedPath = protectedPaths.some((path) =>

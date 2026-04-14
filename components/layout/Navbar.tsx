@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { type User } from '@supabase/supabase-js';
 import { LogoutButton } from './LogoutButton';
+import NotificationBell from './NotificationBell';
 import type { Profile } from '@/lib/types';
 
 const NAV_LINKS = [
@@ -77,6 +78,7 @@ export function Navbar() {
         {!loading && (
           user ? (
             <>
+              <NotificationBell currentUserId={user.id} />
               <Link
                 href={dashboardHref}
                 className="hidden md:flex items-center gap-2 text-xs font-headline uppercase tracking-widest text-primary-container hover:opacity-80 transition-opacity"

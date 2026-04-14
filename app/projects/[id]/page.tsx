@@ -1,102 +1,252 @@
-'use client';
+import { Navbar } from '@/components/layout/Navbar'
+import { DashboardSidebar } from '@/components/layout/DashboardSidebar'
+import Link from 'next/link'
+import Image from 'next/image'
+import { createClient } from '@/lib/supabase/server'
+import { notFound } from 'next/navigation'
 
-import React from 'react';
-import { Navbar } from '@/components/layout/Navbar';
-import { DashboardSidebar } from '@/components/layout/DashboardSidebar';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import Image from 'next/image';
+export default async function ProjectDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
+  const supabase = await createClient()
 
-export default function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = React.use(params);
+  // Fetch project with founder details
+  const { data: project } = await supabase
+    .from('projects')
+    .select('*, founder:profiles!founder_id(*)')
+    .eq('id', id)
+    .single()
+
+  if (!project) {
+    notFound()
+  }
+
+  const fundingPercent = Math.round(
+    ((project.amount_raised || 0) / (project.funding_goal || 1)) * 100
+  )
+
   return (
-    <div className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right" dir="rtl">
+    <div
+      className="bg-background text-on-surface font-body min-h-screen relative overflow-x-hidden text-right"
+      dir="rtl"
+    >
       {/* Global Background Elements */}
-      <div className="fixed inset-0 hex-grid pointer-events-none z-0"></div>
-      <div className="fixed inset-0 scanline pointer-events-none z-0"></div>
-      
+      <div className="fixed inset-0 hex-grid pointer-events-none z-0 opacity-10"></div>
+      <div className="fixed inset-0 scanline pointer-events-none z-0 opacity-5"></div>
+
       <Navbar />
       <DashboardSidebar />
 
       <main className="xl:mr-64 pt-32 pb-32 px-6 max-w-7xl mx-auto z-10 relative">
-        <div className="mb-8 flex gap-2">
-           <Link href="/opportunities" className="text-primary-container text-sm font-data hover:underline">السوق</Link>
-           <span className="text-slate-500">/</span>
-           <span className="text-slate-300 text-sm font-data">مشروع الذكاء الاصطناعي</span>
+        {/* Breadcrumb */}
+        <div className="mb-8 flex gap-2 text-sm">
+          <Link href="/opportunities" className="text-primary-container font-data hover:underline">
+            السوق
+          </Link>
+          <span className="text-slate-500">/</span>
+          <span className="text-slate-300 font-data truncate">{project.title}</span>
         </div>
 
+        {/* Header */}
         <header className="mb-12">
           <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tighter text-white mb-4">
-            نيوم-الرياض: النقل الذكي
+            {project.title}
           </h1>
           <p className="text-slate-400 max-w-2xl text-lg mb-8 leading-relaxed">
-            منصة متكاملة لإدارة أسطول النقل الجوي داخل المدن، مدعومة بخوارزميات التعلم العميق لتقليل الازدحام بنسبة 40%.
+            {project.description || 'لا توجد وصفة متاحة حالياً'}
           </p>
           <div className="flex flex-wrap gap-4">
-             <Link href={`/projects/${id}/funding`}>
-              <Button className="bg-primary-container text-[#050b14] font-bold px-8 py-3 clip-button hover:shadow-[0_0_15px_rgba(0,255,209,0.3)] transition-all uppercase tracking-widest font-data">
+            <Link href={`/projects/${id}/funding`}>
+              <button className="bg-primary-container text-background font-bold px-8 py-3 clip-button hover:brightness-110 active:scale-95 transition-all uppercase tracking-widest font-data">
                 تمويل المشروع
-              </Button>
+              </button>
             </Link>
-            <Button variant="outline" className="border-secondary-container text-secondary-container bg-secondary-container/5 px-8 py-3 clip-button hover:bg-secondary-container hover:text-black transition-all">
-              تواصل مع المؤسس
-            </Button>
+            <Link href="/messages">
+              <button className="border-2 border-secondary-container text-secondary-container bg-transparent px-8 py-3 clip-button hover:bg-secondary-container hover:text-black transition-all font-bold uppercase tracking-widest font-data">
+                تواصل مع المؤسس
+              </button>
+            </Link>
           </div>
         </header>
 
+        {/* Content Grid */}
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
           <div className="lg:col-span-2 space-y-8">
-            <div className="bg-surface-container p-8 relative">
-              <div className="l-bracket-tr"></div>
-              <h2 className="text-2xl font-bold font-headline mb-4 text-[#00ffd1]">الملخص التنفيذي</h2>
+            {/* Project Image */}
+            {project.img && (
+              <div className="relative h-96 overflow-hidden border border-white/5">
+                <Image
+                  src={project.img}
+                  alt={project.title}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                {project.verified && (
+                  <div className="absolute top-4 left-4 bg-primary-container/20 backdrop-blur-md border border-primary-container/30 px-4 py-2 rounded-lg">
+                    <span className="text-primary-container font-black text-xs uppercase tracking-widest flex items-center gap-2">
+                      <span className="material-symbols-outlined text-base">verified</span>
+                      معتمد
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Executive Summary */}
+            <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+              <div className="l-bracket-tr opacity-20"></div>
+              <h2 className="text-2xl font-bold font-headline mb-4 text-primary-container">
+                الملخص التنفيذي
+              </h2>
               <p className="text-slate-300 leading-loose">
-                يهدف المشروع إلى تأسيس بنية تحتية برمجية متطورة لإدارة وتوجيه مركبات الإقلاع والهبوط العمودي (eVTOL) في مسارات جوية مخصصة داخل المدن السعودية الكبرى. تستخدم المنصة أحدث تقنيات توجيه المسار والذكاء الاصطناعي...
+                {project.description || 'لم يتم تقديم وصف للمشروع بعد.'}
               </p>
             </div>
 
-            <div className="bg-surface-container p-8 relative">
-              <div className="l-bracket-tr"></div>
-              <h2 className="text-2xl font-bold font-headline mb-4 text-secondary-container">العرض المرئي (Pitch)</h2>
-              <div className="aspect-video bg-surface-container-high border border-outline-variant/30 flex items-center justify-center relative group cursor-pointer">
-                 <span className="material-symbols-outlined text-6xl text-slate-500 group-hover:text-secondary-container transition-colors">play_circle</span>
+            {/* Project Details */}
+            <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+              <div className="l-bracket-tr opacity-20"></div>
+              <h2 className="text-2xl font-bold font-headline mb-6 text-secondary-container">
+                تفاصيل المشروع
+              </h2>
+              <div className="space-y-4">
+                <div className="flex justify-between pb-4 border-b border-white/5">
+                  <span className="text-slate-400 font-data text-xs uppercase tracking-widest">الحد الأدنى للاستثمار</span>
+                  <span className="text-white font-data font-black text-lg">
+                    ${(project.min_invest || 0).toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between pb-4 border-b border-white/5">
+                  <span className="text-slate-400 font-data text-xs uppercase tracking-widest">العائد المتوقع</span>
+                  <span className="text-primary-container font-data font-black text-lg">
+                    {project.roi || 'N/A'}
+                  </span>
+                </div>
+                <div className="flex justify-between pb-4 border-b border-white/5">
+                  <span className="text-slate-400 font-data text-xs uppercase tracking-widest">الحالة</span>
+                  <span className="text-tertiary-fixed-dim font-data font-black text-lg uppercase">
+                    {project.status}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Right Column */}
           <div className="space-y-8">
-            <div className="bg-surface-container-high p-6 border-t-2 border-[#00ffd1]">
-              <h3 className="font-bold text-white mb-4">معلومات أساسية</h3>
-              <ul className="space-y-4">
-                <li className="flex justify-between border-b border-outline-variant pb-2">
-                  <span className="text-slate-500 text-sm">التصنيف</span>
-                  <span className="text-white font-bold">التنقل الذكي (Mobility)</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant pb-2">
-                  <span className="text-slate-500 text-sm">المرحلة</span>
-                  <span className="text-[#00ffd1] font-bold">بذرة (Seed)</span>
-                </li>
-                <li className="flex justify-between border-b border-outline-variant pb-2">
-                  <span className="text-slate-500 text-sm">التقييم المستهدف</span>
-                  <span className="text-white font-bold">40,000,000 ر.س</span>
-                </li>
-              </ul>
+            {/* Basic Info Card */}
+            <div className="bg-[#0A1628] border border-white/5 p-6 relative">
+              <div className="l-bracket-bl opacity-20"></div>
+              <h3 className="font-bold text-white mb-6 text-lg font-headline">معلومات أساسية</h3>
+              <div className="space-y-4">
+                <div className="pb-4 border-b border-white/10">
+                  <p className="text-slate-500 text-[10px] font-data uppercase tracking-widest mb-1">
+                    التصنيف
+                  </p>
+                  <p className="text-white font-headline font-bold capitalize">{project.category || 'غير محدد'}</p>
+                </div>
+                <div className="pb-4 border-b border-white/10">
+                  <p className="text-slate-500 text-[10px] font-data uppercase tracking-widest mb-1">
+                    هدف التمويل
+                  </p>
+                  <p className="text-primary-container font-data font-black text-xl">
+                    ${(project.funding_goal || 0).toLocaleString()}
+                  </p>
+                </div>
+                <div className="pb-4 border-b border-white/10">
+                  <p className="text-slate-500 text-[10px] font-data uppercase tracking-widest mb-1">
+                    تم تجميعه
+                  </p>
+                  <p className="text-tertiary-fixed-dim font-data font-black text-xl">
+                    ${(project.amount_raised || 0).toLocaleString()}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-slate-500 text-[10px] font-data uppercase tracking-widest mb-2">
+                    التقدم
+                  </p>
+                  <div className="bg-slate-900 rounded-full h-2">
+                    <div
+                      className="h-full bg-primary-container shadow-[0_0_10px_#00ffd1] transition-all duration-300"
+                      style={{ width: `${Math.min(fundingPercent, 100)}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-primary-container text-[10px] font-data font-black mt-2">
+                    {fundingPercent}%
+                  </p>
+                </div>
+              </div>
             </div>
-            
-            <div className="bg-surface-container p-6 relative">
-               <h3 className="font-bold font-headline text-secondary-container mb-4">الفريق المؤسس</h3>
-               <div className="flex items-center gap-4 mb-4">
-                 <div className="w-12 h-12 bg-surface-container-highest rounded-full overflow-hidden border border-secondary-container/30">
-                    <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop" width={48} height={48} alt="Founder" className="w-full h-full object-cover" />
-                 </div>
-                 <div>
-                    <p className="text-sm font-bold text-white">د. طارق الناصر</p>
-                    <p className="text-[10px] text-slate-400 font-data uppercase">CEO & Founder</p>
-                 </div>
-               </div>
+
+            {/* Founder Card */}
+            {project.founder && (
+              <div className="bg-[#0A1628] border border-white/5 p-6 relative">
+                <div className="l-bracket-tr opacity-20"></div>
+                <h3 className="font-bold text-white mb-6 text-lg font-headline">مؤسس المشروع</h3>
+                <div className="text-center">
+                  {project.founder.avatar_url ? (
+                    <Image
+                      src={project.founder.avatar_url}
+                      alt={project.founder.full_name || 'مؤسس'}
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 rounded-full mx-auto mb-4 border-2 border-primary-container"
+                    />
+                  ) : (
+                    <div className="w-20 h-20 rounded-full mx-auto mb-4 bg-slate-700 flex items-center justify-center border-2 border-primary-container">
+                      <span className="material-symbols-outlined text-primary-container text-4xl">
+                        person
+                      </span>
+                    </div>
+                  )}
+                  <h4 className="text-white font-bold font-headline mb-2">
+                    {project.founder.full_name || 'مؤسس مجهول'}
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-4 line-clamp-2">
+                    {project.founder.bio || 'لا توجد سيرة ذاتية'}
+                  </p>
+                  <Link href="/messages">
+                    <button className="w-full bg-primary-container/10 border border-primary-container/30 text-primary-container font-bold py-2 hover:bg-primary-container/20 transition-all text-sm uppercase tracking-widest font-data">
+                      أرسل رسالة
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Key Stats */}
+            <div className="bg-[#0A1628] border border-white/5 p-6 relative">
+              <div className="l-bracket-bl opacity-20"></div>
+              <h3 className="font-bold text-white mb-6 text-lg font-headline">الإحصائيات</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-500 font-data text-xs uppercase">مشاهدات</span>
+                  <span className="text-white font-data font-black text-lg">245</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-500 font-data text-xs uppercase">المهتمون</span>
+                  <span className="text-primary-container font-data font-black text-lg">12</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-500 font-data text-xs uppercase">عمر المشروع</span>
+                  <span className="text-tertiary-fixed-dim font-data font-black text-lg">
+                    {Math.floor(
+                      (Date.now() - new Date(project.created_at).getTime()) /
+                        (1000 * 60 * 60 * 24)
+                    )}{' '}
+                    يوم
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </main>
     </div>
-  );
+  )
 }

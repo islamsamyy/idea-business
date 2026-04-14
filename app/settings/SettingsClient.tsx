@@ -1,0 +1,401 @@
+'use client'
+
+import React, { useState } from 'react'
+import { Navbar } from '@/components/layout/Navbar'
+import { DashboardSidebar } from '@/components/layout/DashboardSidebar'
+import { createClient } from '@/lib/supabase/client'
+import { toast } from 'sonner'
+import { useTransition } from 'react'
+import { updateProfileInfo } from './actions'
+import type { Profile } from '@/lib/types'
+
+interface SettingsClientProps {
+  profile: Profile | null
+  userEmail: string
+}
+
+export default function SettingsClient({ profile, userEmail }: SettingsClientProps) {
+  const [activeTab, setActiveTab] = useState<'profile' | 'security'>('profile')
+  const [isPending, startTransition] = useTransition()
+
+  // Profile form state
+  const [fullName, setFullName] = useState(profile?.full_name || '')
+  const [bio, setBio] = useState(profile?.bio || '')
+  const [phone, setPhone] = useState(profile?.phone || '')
+  const [selectedInterests, setSelectedInterests] = useState<string[]>(profile?.interests || [])
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [avatarPreview, setAvatarPreview] = useState<string>(profile?.avatar_url || '')
+
+  // Security form state
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordLoading, setPasswordLoading] = useState(false)
+  const [passwordMessage, setPasswordMessage] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+
+  const supabase = createClient()
+
+  const interests = [
+    'التكنولوجيا المالية',
+    'الذكاء الاصطناعي',
+    'العقارات',
+    'الصحة الرقمية',
+    'الطاقة المستدامة',
+    'الأمن السيبراني',
+    'التجارة الإلكترونية',
+    'سلاسل الإمداد',
+  ]
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setAvatarFile(file)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setAvatarPreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleProfileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!fullName.trim()) {
+      toast.error('يجب إدخال الاسم الكامل')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('full_name', fullName)
+    formData.append('bio', bio)
+    formData.append('phone', phone)
+    formData.append('interests', JSON.stringify(selectedInterests))
+    if (avatarFile) {
+      formData.append('avatar', avatarFile)
+    }
+
+    startTransition(async () => {
+      const result = await updateProfileInfo(formData)
+      if (result?.error) {
+        toast.error(result.error)
+      } else {
+        toast.success('تم تحديث الملف الشخصي بنجاح')
+      }
+    })
+  }
+
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setPasswordLoading(true)
+    setPasswordMessage('')
+    setPasswordError('')
+
+    if (password !== confirmPassword) {
+      setPasswordError('كلمة المرور غير متطابقة')
+      setPasswordLoading(false)
+      return
+    }
+
+    if (password.length < 6) {
+      setPasswordError('كلمة المرور يجب أن تتكون من 6 أحرف على الأقل')
+      setPasswordLoading(false)
+      return
+    }
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: password,
+      })
+
+      if (error) throw error
+
+      setPasswordMessage('تم تحديث كلمة المرور بنجاح')
+      setPassword('')
+      setConfirmPassword('')
+      toast.success('تم تحديث كلمة المرور')
+    } catch (err: unknown) {
+      setPasswordError((err as Error).message || 'حدث خطأ أثناء التحديث')
+      toast.error('فشل تحديث كلمة المرور')
+    } finally {
+      setPasswordLoading(false)
+    }
+  }
+
+  return (
+    <main className="xl:mr-64 pt-32 pb-32 px-6 max-w-7xl mx-auto z-10 relative">
+      <header className="mb-12">
+        <h1 className="text-4xl font-headline font-black text-white uppercase tracking-tight mb-2">
+          الإعدادات
+        </h1>
+        <p className="text-slate-400">إدارة ملفك الشخصي وإعدادات الأمان</p>
+      </header>
+
+      {/* Tabs */}
+      <div className="flex gap-4 mb-8 border-b border-white/5">
+        <button
+          onClick={() => setActiveTab('profile')}
+          className={`px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm transition-all relative ${
+            activeTab === 'profile'
+              ? 'text-primary-container border-b-2 border-primary-container'
+              : 'text-slate-500 hover:text-slate-300'
+          }`}
+        >
+          الملف الشخصي
+        </button>
+        <button
+          onClick={() => setActiveTab('security')}
+          className={`px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm transition-all relative ${
+            activeTab === 'security'
+              ? 'text-primary-container border-b-2 border-primary-container'
+              : 'text-slate-500 hover:text-slate-300'
+          }`}
+        >
+          الأمان
+        </button>
+      </div>
+
+      {/* Profile Tab */}
+      {activeTab === 'profile' && (
+        <div className="space-y-8 animate-in fade-in">
+          <form onSubmit={handleProfileSubmit} className="space-y-8">
+            {/* Avatar Section */}
+            <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+              <div className="l-bracket-tr opacity-20"></div>
+              <h2 className="text-2xl font-bold font-headline text-white mb-6">الصورة الشخصية</h2>
+
+              <div className="flex items-center gap-8">
+                <div className="relative">
+                  {avatarPreview ? (
+                    <img
+                      src={avatarPreview}
+                      alt="Avatar preview"
+                      className="w-32 h-32 rounded-full object-cover border-4 border-primary-container"
+                    />
+                  ) : (
+                    <div className="w-32 h-32 rounded-full bg-slate-700 border-4 border-primary-container flex items-center justify-center">
+                      <span className="material-symbols-outlined text-6xl text-slate-500">
+                        person
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <label className="flex-grow cursor-pointer">
+                  <div className="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center group hover:border-primary-container/50 transition-all">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleAvatarChange}
+                      className="hidden"
+                    />
+                    <span className="material-symbols-outlined text-4xl text-slate-500 mb-4 group-hover:text-primary-container transition-colors block">
+                      photo_camera
+                    </span>
+                    <p className="text-sm text-slate-400 mb-2">
+                      {avatarFile ? avatarFile.name : 'اختر صورة جديدة'}
+                    </p>
+                    <p className="text-[10px] text-slate-600">JPG, PNG (Max 5MB)</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* Profile Info */}
+            <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+              <div className="l-bracket-bl opacity-20"></div>
+              <h2 className="text-2xl font-bold font-headline text-white mb-6">معلومات الملف الشخصي</h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    الاسم الكامل
+                  </label>
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 p-4 rounded-xl text-white focus:border-primary-container transition-all outline-none"
+                    placeholder="أدخل اسمك الكامل"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    البريد الإلكتروني
+                  </label>
+                  <input
+                    type="email"
+                    value={userEmail}
+                    disabled
+                    className="w-full bg-slate-900/50 border border-white/5 p-4 rounded-xl text-slate-400 cursor-not-allowed opacity-50"
+                  />
+                  <p className="text-[10px] text-slate-500 mt-2">
+                    لا يمكن تغيير البريد الإلكتروني
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    رقم الهاتف
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 p-4 rounded-xl text-white focus:border-primary-container transition-all outline-none"
+                    placeholder="+966 5X XXX XXXX"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    السيرة الذاتية
+                  </label>
+                  <textarea
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 p-4 rounded-xl text-white focus:border-primary-container transition-all outline-none resize-none"
+                    placeholder="أخبرنا عن نفسك..."
+                    rows={4}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Interests */}
+            <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+              <div className="l-bracket-tr opacity-20"></div>
+              <h2 className="text-2xl font-bold font-headline text-white mb-6">اهتماماتك</h2>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {interests.map((interest) => (
+                  <button
+                    key={interest}
+                    type="button"
+                    onClick={() => {
+                      setSelectedInterests((prev) =>
+                        prev.includes(interest)
+                          ? prev.filter((i) => i !== interest)
+                          : [...prev, interest]
+                      )
+                    }}
+                    className={`px-4 py-3 rounded-lg font-headline text-xs font-bold uppercase tracking-widest transition-all border ${
+                      selectedInterests.includes(interest)
+                        ? 'bg-primary-container text-background border-primary-container shadow-[0_0_15px_rgba(0,255,209,0.3)]'
+                        : 'bg-slate-900 border-white/10 text-slate-300 hover:border-primary-container/50'
+                    }`}
+                  >
+                    {interest}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                disabled={isPending}
+                className="bg-primary-container text-background font-black px-12 py-4 clip-button hover:brightness-110 active:scale-95 transition-all disabled:opacity-50 flex items-center gap-3"
+              >
+                {isPending ? 'جاري الحفظ...' : 'حفظ التغييرات'}
+                {!isPending && <span className="material-symbols-outlined">check</span>}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Security Tab */}
+      {activeTab === 'security' && (
+        <div className="space-y-8 animate-in fade-in">
+          {/* Active Sessions */}
+          <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+            <div className="l-bracket-tr opacity-20"></div>
+            <h2 className="text-2xl font-bold font-headline text-white mb-6">الجلسات النشطة</h2>
+
+            <div className="flex items-center justify-between p-4 bg-slate-900 border-r-4 border-r-primary-container rounded-lg">
+              <div className="flex items-center gap-4">
+                <span className="material-symbols-outlined text-primary-container text-2xl">
+                  desktop_windows
+                </span>
+                <div>
+                  <p className="font-headline font-bold text-white">المتصفح الحالي</p>
+                  <p className="text-[10px] text-slate-400 font-data">جلسة نشطة</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-data text-primary-container bg-primary-container/10 px-3 py-1 rounded uppercase font-bold tracking-widest">
+                نشط
+              </span>
+            </div>
+          </div>
+
+          {/* Change Password */}
+          <div className="bg-[#0A1628] border border-white/5 p-8 relative">
+            <div className="l-bracket-bl opacity-20"></div>
+            <h2 className="text-2xl font-bold font-headline text-white mb-6 flex items-center gap-3">
+              <span className="material-symbols-outlined">lock_reset</span>
+              تغيير كلمة المرور
+            </h2>
+
+            <form onSubmit={handlePasswordUpdate} className="space-y-6">
+              {passwordError && (
+                <div className="bg-red-500/10 text-red-400 p-4 border border-red-500/30 rounded-lg text-sm">
+                  {passwordError}
+                </div>
+              )}
+              {passwordMessage && (
+                <div className="bg-green-500/10 text-green-400 p-4 border border-green-500/30 rounded-lg text-sm">
+                  {passwordMessage}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    كلمة المرور الجديدة
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 p-4 rounded-xl text-white focus:border-primary-container transition-all outline-none"
+                    placeholder="••••••••••"
+                    required
+                    minLength={6}
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-data text-xs text-slate-500 uppercase tracking-widest mb-2">
+                    تأكيد كلمة المرور
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full bg-slate-900 border border-white/10 p-4 rounded-xl text-white focus:border-primary-container transition-all outline-none"
+                    placeholder="••••••••••"
+                    required
+                    minLength={6}
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={passwordLoading}
+                  className="bg-primary-container text-background font-black px-12 py-4 clip-button hover:brightness-110 active:scale-95 transition-all disabled:opacity-50 flex items-center gap-3"
+                >
+                  {passwordLoading ? 'جاري الحفظ...' : 'تحديث كلمة المرور'}
+                  {!passwordLoading && <span className="material-symbols-outlined">bolt</span>}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </main>
+  )
+}

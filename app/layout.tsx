@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
-import { Orbitron, IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
+import { Inter, Readex_Pro } from "next/font/google";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
-  variable: "--font-ibm-plex-arabic",
+const readexPro = Readex_Pro({
+  variable: "--font-readex-pro",
   subsets: ["arabic"],
-  weight: ["400", "700"],
-});
-
-const tajawal = Tajawal({
-  variable: "--font-tajawal",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -36,13 +30,13 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${orbitron.variable} ${ibmPlexSansArabic.variable} ${tajawal.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${readexPro.variable} h-full antialiased dark`}
     >
       <head>
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground font-body">
+      <body className="min-h-full flex flex-col bg-[#050608] text-[#f8fafc] font-body selection:bg-[#00ffd1]/30 selection:text-[#00ffd1]">
         {children}
         <Toaster position="bottom-right" theme="dark" />
         <Analytics />

@@ -3,6 +3,7 @@ import { Inter, Readex_Pro } from "next/font/google";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,16 +32,24 @@ export default function RootLayout({
       lang="ar"
       dir="rtl"
       className={`${inter.variable} ${readexPro.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()`,
+          }}
+        />
       </head>
-      <body className="min-h-full flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 text-slate-900 font-body selection:bg-cyan-200/60 selection:text-cyan-900">
-        {children}
-        <Toaster position="bottom-right" theme="light" />
-        <Analytics />
-        <SpeedInsights />
+      <body className="min-h-full flex flex-col bg-background text-foreground font-body selection:bg-primary-container/30 selection:text-primary-container">
+        <ThemeProvider>
+          {children}
+          <Toaster position="bottom-right" theme="dark" />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

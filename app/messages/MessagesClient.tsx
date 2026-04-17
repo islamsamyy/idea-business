@@ -77,7 +77,16 @@ export default function MessagesClient({ currentUserId, initialMessages }: Messa
       if (!conversationMap.has(otherUserId)) {
         conversationMap.set(otherUserId, {
           userId: otherUserId,
-          profile: otherProfile || { id: otherUserId, full_name: 'Unknown User', role: 'founder' as const },
+          profile: otherProfile || {
+            id: otherUserId,
+            full_name: 'Unknown User',
+            role: 'founder' as const,
+            avatar_url: null,
+            bio: null,
+            kyc_status: 'unverified' as const,
+            tier: 'basic' as const,
+            created_at: new Date().toISOString(),
+          },
           lastMessage: msg,
           unreadCount: 0,
         })

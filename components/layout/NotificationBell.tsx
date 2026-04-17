@@ -104,7 +104,7 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 hover:text-primary-container transition-colors text-slate-400"
+        className="relative p-2 hover:text-primary-container transition-colors text-muted-foreground"
         aria-label="Notifications"
       >
         <span className="material-symbols-outlined">notifications</span>
@@ -124,10 +124,10 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
           />
 
           {/* Notification Panel */}
-          <div className="absolute left-0 top-full mt-2 w-96 bg-[#0A1628] border border-white/5 z-50 shadow-2xl rounded-xl overflow-hidden">
+          <div className="absolute left-0 top-full mt-2 w-96 bg-surface-container-low dark:bg-[#0A1628] border border-primary-container/15 dark:border-white/5 z-50 shadow-2xl rounded-xl overflow-hidden">
             {/* Header */}
-            <div className="p-4 border-b border-white/5 bg-slate-900/30 flex justify-between items-center">
-              <h3 className="font-headline text-sm font-bold text-white">الإخطارات</h3>
+            <div className="p-4 border-b border-primary-container/10 dark:border-white/5 bg-surface-container/30 dark:bg-slate-900/30 flex justify-between items-center">
+              <h3 className="font-headline text-sm font-bold text-foreground">الإخطارات</h3>
               {unreadCount > 0 && (
                 <button
                   onClick={async () => {
@@ -146,9 +146,9 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
             {/* Notifications List */}
             <div className="max-h-96 overflow-y-auto no-scrollbar">
               {isLoading ? (
-                <div className="p-6 text-center text-slate-400 text-sm">جاري التحميل...</div>
+                <div className="p-6 text-center text-muted-foreground text-sm">جاري التحميل...</div>
               ) : notifications.length === 0 ? (
-                <div className="p-6 text-center text-slate-400">
+                <div className="p-6 text-center text-muted-foreground">
                   <span className="material-symbols-outlined text-3xl block mb-2 opacity-30">
                     notifications_none
                   </span>
@@ -163,21 +163,21 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
                       handleMarkAsRead(notif.id)
                       setIsOpen(false)
                     }}
-                    className={`block p-4 border-b border-white/5 hover:bg-white/5 transition-colors text-right ${
+                    className={`block p-4 border-b border-primary-container/10 dark:border-white/5 hover:bg-surface-container-high dark:hover:bg-white/5 transition-colors text-right ${
                       !notif.read ? 'bg-primary-container/5' : ''
                     }`}
                   >
                     <div className="flex gap-3">
                       <div className="flex-grow min-w-0">
                         <h4
-                          className={`text-sm font-bold truncate ${!notif.read ? 'text-white' : 'text-slate-300'}`}
+                          className={`text-sm font-bold truncate ${!notif.read ? 'text-foreground' : 'text-muted-foreground'}`}
                         >
                           {notif.title}
                         </h4>
-                        <p className="text-xs text-slate-400 line-clamp-2 mt-1">
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
                           {notif.body}
                         </p>
-                        <p className="text-[10px] text-slate-500 mt-2 font-data">
+                        <p className="text-[10px] text-muted-foreground mt-2 font-data">
                           {new Date(notif.created_at).toLocaleDateString('ar-SA', {
                             month: 'short',
                             day: 'numeric',
@@ -188,7 +188,7 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
                       </div>
 
                       <div className="shrink-0 flex items-start gap-2">
-                        <span className={`material-symbols-outlined text-lg ${!notif.read ? 'text-primary-container' : 'text-slate-500'}`}>
+                        <span className={`material-symbols-outlined text-lg ${!notif.read ? 'text-primary-container' : 'text-muted-foreground'}`}>
                           {getNotificationIcon(notif.type)}
                         </span>
                         {!notif.read && (
@@ -206,7 +206,7 @@ export default function NotificationBell({ currentUserId }: NotificationBellProp
               <Link
                 href="/notifications"
                 onClick={() => setIsOpen(false)}
-                className="block p-4 text-center text-primary-container font-headline text-[10px] font-black uppercase tracking-widest border-t border-white/5 hover:bg-white/5 transition-colors"
+                className="block p-4 text-center text-primary-container font-headline text-[10px] font-black uppercase tracking-widest border-t border-primary-container/10 dark:border-white/5 hover:bg-surface-container-high dark:hover:bg-white/5 transition-colors"
               >
                 عرض جميع الإخطارات
               </Link>

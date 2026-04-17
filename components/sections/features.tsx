@@ -9,21 +9,22 @@ export function Features() {
   ];
 
   return (
-    <section className="py-24 px-6 bg-surface-container-lowest">
+    <section className="py-24 px-6 bg-surface-container-low">
       <div className="container mx-auto">
         <div className="text-center mb-20">
           <span className="font-data text-xs text-primary-container block mb-4 tracking-[0.3em] uppercase">— لماذا نحن؟</span>
-          <h2 className="font-headline text-5xl md:text-6xl font-bold text-white">لماذا IDEA BUSINESS؟</h2>
+          <h2 className="font-headline text-5xl md:text-6xl font-bold text-foreground">لماذا IDEA BUSINESS؟</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-primary-container/10 dark:bg-white/5 border border-primary-container/15 dark:border-white/5">
           {features.map((f, i) => (
-            <div key={i} className="bg-[#0A1628] p-12 relative group overflow-hidden">
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary-container opacity-30"></div>
-              <div className="text-primary-container mb-6">
+            <div key={i} className="bg-surface-container-lowest dark:bg-[#0A1628] p-12 relative group overflow-hidden hover:bg-surface-container transition-colors duration-300">
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary-container opacity-30 group-hover:opacity-60 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-container/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-primary-container mb-6 relative z-10">
                 <span className="material-symbols-outlined text-4xl">{f.icon}</span>
               </div>
-              <h4 className="text-2xl font-bold text-white mb-4">{f.title}</h4>
-              <p className="text-muted-foreground font-body">{f.desc}</p>
+              <h4 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary-container transition-colors relative z-10">{f.title}</h4>
+              <p className="text-muted-foreground font-body relative z-10">{f.desc}</p>
             </div>
           ))}
         </div>

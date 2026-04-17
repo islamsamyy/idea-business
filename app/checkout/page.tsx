@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { toast } from 'sonner';
 import { createStripeSession } from './actions';
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -233,5 +233,17 @@ export default function CheckoutPage() {
         </form>
       </main>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="bg-background text-foreground min-h-screen flex items-center justify-center">
+        <span className="material-symbols-outlined text-4xl text-primary-container animate-spin">progress_activity</span>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }

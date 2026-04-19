@@ -23,13 +23,11 @@ async function getStats(): Promise<Stat[]> {
 
   try {
     const supabase = await createClient();
-    const [{ count: projects }, { count: investors }] = await Promise.all([
+    const [{ count: projects }, { count: investors }, { count: investments }] = await Promise.all([
       supabase.from("projects").select("*", { count: "exact", head: true }),
-      supabase.from("profiles").select("*", { count: "exact", head: true })
+      supabase.from("profiles").select("*", { count: "exact", head: true }).eq("role", "investor"),
+      supabase.from("investments").select("*", { count: "exact", head: true }).eq("status", "paid")
     ]);
-    const { count: deals } = await supabase
-      .from("deals")
-      .select("*", { count: "exact", head: true });
 
     return [
       {
@@ -43,7 +41,7 @@ async function getStats(): Promise<Stat[]> {
         color: "text-secondary-fixed-dim",
       },
       {
-        value: `${deals || 29}`,
+        value: `${investments || 29}`,
         label: "صفقة مُنجزة",
         color: "text-tertiary-fixed-dim",
       },

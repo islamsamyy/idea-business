@@ -13,8 +13,10 @@ import type { Profile } from '@/lib/types';
 const NAV_LINKS = [
   { href: '/', label: 'الرئيسية' },
   { href: '/opportunities', label: 'الفرص' },
+  { href: '/discover', label: 'اكتشف' },
+  { href: '/trending', label: 'شائع' },
+  { href: '/leaderboard', label: 'الأفضل' },
   { href: '/investors', label: 'المستثمرون' },
-  { href: '/pricing', label: 'الأسعار' },
 ];
 
 const NavLinks = ({ onClick, pathname }: { onClick?: () => void, pathname: string }) => (

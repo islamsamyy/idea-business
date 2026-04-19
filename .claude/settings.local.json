@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(netstat -tulpn)",
+      "Bash(cmd.exe /c \"rd /s /q \\\\\"d:\\\\IDEA BUSINESS\\\\.next\\\\\" 2>nul & exit 0\")",
+      "Bash(cmd.exe /c \"taskkill /PID 8668 /F 2>&1\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3003/)",
+      "Bash(cmd.exe /c \"netstat -ano | findstr :3000\")",
+      "Bash(cmd.exe /c \"taskkill /F /IM node.exe /T 2>nul & exit 0\")",
+      "Bash(cmd.exe /c \"tasklist | findstr node\")",
+      "Bash(cmd.exe /c \"del /f /q \\\\\"d:\\\\IDEA BUSINESS\\\\.next\\\\dev\\\\server.lock\\\\\" 2>nul & del /f /q \\\\\"d:\\\\IDEA BUSINESS\\\\.next\\\\dev\\\\lock\\\\\" 2>nul & dir \\\\\"d:\\\\IDEA BUSINESS\\\\.next\\\\dev\\\\\\\\\")"
+    ]
+  }
+}
